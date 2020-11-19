@@ -12,10 +12,10 @@ const artistRoutes = require('./routes/artistRoutes')
 const changelogRoutes = require('./routes/changelogRoutes')
 const pagesRoutes = require('./routes/pagesRoutes')
 
-server.use('/api/v1/fruits', fruitRoutes)
+// server.use('/api/v1/fruits', fruitRoutes)
 server.use('/api/v1/albums', albumRoutes)
-// server.use('/artists', artistRoutes)
-// server.use('/changelog', changelogRoutes)
-// server.use('/pages', pagesRoutes)
+server.use('/api/v1/artists', artistRoutes)
+server.use('/api/v1/changelog', changelogRoutes)
+// server.use('/api/v1/pages', pagesRoutes) {/* handled by react now? */}
 
 module.exports = server

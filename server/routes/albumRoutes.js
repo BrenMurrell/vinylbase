@@ -13,4 +13,15 @@ router.get('/', (req, res) => {
     })
 })
 
+router.get('/:id', (req, res) => {
+  const id = req.params.id
+  return db.getAlbumById(id)
+    .then(album => {
+      res.json(album)
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+})
+
 module.exports = router

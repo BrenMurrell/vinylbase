@@ -21,7 +21,8 @@ test('page header includes fruit', () => {
 })
 
 test('renders an <li> for each fruit', () => {
-  const fruits = ['orange', 'persimmons', 'kiwi fruit']
-  const wrapper = mount(<App fruits={fruits} />)
+  const albums = ['orange', 'persimmons', 'kiwi fruit']
+  // const wrapper = mount(<App fruits={fruits} />)
+  const wrapper = mount(<App albums={albums} />)
   expect(wrapper.find('li')).toHaveLength(3)
 })

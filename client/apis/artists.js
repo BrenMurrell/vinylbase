@@ -8,3 +8,10 @@ export function getArtists () {
       return res.body
     })
 }
+
+export function getArtist (id) {
+  return request.get(rootUrl + '/artists/' + id)
+    .then(res => {
+      return res.body
+    })
+}

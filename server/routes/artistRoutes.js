@@ -13,4 +13,29 @@ router.get('/', (req, res) => {
     })
 })
 
+router.get('/:id', (req, res) => {
+  const artistId = req.params.id
+
+  return db.getArtistById(artistId)
+    .then(artist => {
+      res.json(artist)
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+})
+
+router.get('/:id/albums', (req, res) => {
+  const artistId = req.params.id
+
+  return db.getAlbumsByArtist(artistId)
+    .then(artist => {
+      res.json(artist)
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+})
+
+
 module.exports = router

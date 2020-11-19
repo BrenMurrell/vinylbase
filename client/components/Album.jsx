@@ -1,34 +1,36 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchAlbum } from '../actions'
+import { Link } from 'react-router-dom'
+
+import { fetchAlbum } from '../actions/albums'
 
 class Album extends React.Component {
   state = {
     album: {}
   }
   componentDidMount () {
-    var albumID = this.props.match.params.id
+    const albumID = this.props.match.params.id
     this.props.dispatch(fetchAlbum(albumID))
   }
   render() {
     return (
-      <div class="album">
-        <h1>{this.props.album.name}</h1>
-        <div class="album-media">
-          <div class="album-media__block album-media__block--artwork">
-              <img src={this.props.album.image} alt={`Album art for ${this.props.album.name}`} class="album__art" />
+      <div className="album">
+        <h1>{this.props.album.album_name}</h1>
+        <div className="album-media">
+          <div className="album-media__block album-media__block--artwork">
+              <img src={this.props.album.image} alt={`Album art for ${this.props.album.name}`} className="album__art" />
 
           </div>
-          <div class="album-media__block album-media__block--media">
-              <iframe src={`https://open.spotify.com/embed/album/${this.props.album.spotifyId}`} width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+          <div className="album-media__block album-media__block--media">
+              <iframe src={`https://open.spotify.com/embed/album/${this.props.album.spotifyId}`} width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
               </div>
-          <div class="album-media__block album-media__block--meta">
+          <div className="album-media__block album-media__block--meta">
             <dl>
               <dt>Artist</dt>
               <dd>
-                <a href="/artists/2">
-                  The Beatles
-                </a>
+                <Link to={`/artists/${this.props.album.artist}`}>
+                  {this.props.album.artist_name}
+                </Link>
               </dd>
               <dt>Condition</dt>
               <dd>{this.props.album.condition}</dd>
@@ -36,10 +38,10 @@ class Album extends React.Component {
               <dd>{this.props.album.notes}</dd>
             </dl>
             <p>
-              <a href="/albums/6/edit" class="button button-primary">Edit this album</a>
+              <a href="/albums/6/edit" className="button button-primary">Edit this album</a>
             </p>
             <p>
-              <a href="/albums/6/delete" class="button button-primary">Delete this album</a>
+              <a href="/albums/6/delete" className="button button-primary">Delete this album</a>
             </p>
           </div>
         </div>

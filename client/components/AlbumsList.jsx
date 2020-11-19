@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { fetchAlbums } from '../actions'
+import { fetchAlbums } from '../actions/albums'
 
 import AlbumListItem from './AlbumListItem'
 

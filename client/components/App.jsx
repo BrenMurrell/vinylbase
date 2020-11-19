@@ -6,22 +6,13 @@ import { HashRouter as Router,
   Switch, } from 'react-router-dom'
 
 
-import { fetchFruits, fetchAlbums, fetchArtists } from '../actions'
 
 import AlbumsList from './AlbumsList'
 import Album from './Album'
+import ArtistsList from './ArtistsLists'
+import Artist from './Artist'
 
 export class App extends React.Component {
-  state = {
-    fruits: [],
-    albums: []
-  }
-
-  componentDidMount () {
-    // this.props.dispatch(fechFruits())
-
-    this.props.dispatch(fetchAlbums())
-  }
 
   render () {
     return (
@@ -29,11 +20,14 @@ export class App extends React.Component {
         <h1>Fullstack Boilerplate - with Albums!</h1>
         <Router>
           <Link to="/">Home</Link>{' | '}
-          <Link to="/albums">Albums</Link>
+          <Link to="/albums">Albums</Link>{' | '}
+          <Link to="/artists">Artists</Link>
           <Switch>
             {/* <Route path="/" component={Home} /> */}
             <Route path="/albums" exact component={AlbumsList} />
             <Route path="/albums/:id"  component={Album} />
+            <Route path="/artists" exact component={ArtistsList} />
+            <Route path="/artists/:id"  component={Artist} />
           </Switch>
         </Router>
       </div>
@@ -45,6 +39,7 @@ function mapStateToProps (globalState) {
   return {
     fruits: globalState.fruits,
     albums: globalState.albums
+
   }
 }
 

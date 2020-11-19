@@ -1,4 +1,4 @@
-import { SET_ALBUM } from '../actions'
+import { SET_ALBUM } from '../actions/albums'
 
 const initialState = []
 

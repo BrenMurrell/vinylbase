@@ -15,3 +15,10 @@ export function getAlbum (id) {
       return res.body
     })
 }
+
+export function getAlbumsByArtist (artistId) {
+  return request.get(rootUrl + '/artists/' + artistId + '/albums')
+    .then(res => {
+      return res.body
+    })
+}

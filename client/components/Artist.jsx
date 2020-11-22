@@ -27,9 +27,6 @@ const Artist = (props) => {
       message: `${props.artist.name} deleted`,
     }
     props.dispatch(setToaster(toaster))
-    setTimeout(() => {
-      props.dispatch(clearToaster())
-    }, 5000);
   }
 
 

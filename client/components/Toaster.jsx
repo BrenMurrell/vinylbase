@@ -9,7 +9,13 @@ const Toaster = (props) => {
     props.dispatch(clearToaster())
   }
 
-
+  useEffect(() => {
+    //console.log('test mounted')
+    setTimeout(() => {
+      props.dispatch(clearToaster())
+    }, 4000);
+  }, [])
+  
   return (
     <div className={`toaster toaster--${props.toaster.type}`}>
       <p className="toaster__text">{props.toaster.message}</p>

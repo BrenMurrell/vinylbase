@@ -22,11 +22,6 @@ const ArtistAdd = (props) => {
       message: `${name} added`,
     }
     props.dispatch(setToaster(toaster))
-    setTimeout(() => {
-      props.dispatch(clearToaster())
-    }, 5000);
-
-
   }
 
   return (

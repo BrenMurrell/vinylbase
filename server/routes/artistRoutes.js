@@ -25,6 +25,20 @@ router.get('/:id', (req, res) => {
     })
 })
 
+router.delete('/:id', (req, res) => {
+  const artistId = req.params.id
+
+  return db.deleteArtist(artistId)
+    .then(artist => {
+      res.json(artist)
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+})
+
+
+
 router.get('/:id/albums', (req, res) => {
   const artistId = req.params.id
 
@@ -35,6 +49,18 @@ router.get('/:id/albums', (req, res) => {
     .catch(err => {
       console.log(err.message)
     })
+})
+
+router.post('/', (req, res) => {
+  const artist = req.body
+  return db.addArtist(artist)
+    .then(ids => {
+      res.json(ids[0])
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+
 })
 
 

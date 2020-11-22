@@ -1,0 +1,49 @@
+$close-button-width: 1.2rem;
+
+.toaster {
+  position: fixed;
+  top: 10px;
+  background-color: rgba(200,255,200,0.96);
+  left: 50%;
+  width: 360px;
+  margin-left: -180px;
+  border-radius: 12px;
+  padding: 1.2rem 4rem 1.2rem 1.2rem;
+
+  &--error {
+    background-color: rgba(255,50,50,0.96);
+    color: #fff;
+  }
+
+  &__text {
+    margin: 0;
+    padding: 0;
+  }
+
+  &__close-btn {
+    height: $close-button-width;
+    width: $close-button-width;
+    display: block;
+    border-radius: 50%;
+    background-color: #fff;
+    text-indent: -999rem;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    border: 0;
+    cursor: pointer;
+    &:after {
+      content: "x";
+      display: block;
+      text-indent: 0;
+      position: absolute;
+      top: 0;
+      height: $close-button-width;
+      width: $close-button-width;
+      line-height: $close-button-width;
+      text-align: center;
+      left: 0;
+      font-size: 0.6rem;
+    }
+  }
+}

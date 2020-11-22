@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 import { fetchArtists } from '../actions/artists'
 import { fetchAlbumsByArtist } from '../actions/albums'
-
 class ArtistsList extends React.Component {
 
   componentDidMount() {
@@ -25,6 +24,7 @@ class ArtistsList extends React.Component {
             </Link>
           </p>
         ))}
+        <Link to={`/artist/add`}>Add a new artist</Link>
       </div>
     )
   }

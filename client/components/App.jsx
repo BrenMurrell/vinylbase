@@ -3,14 +3,17 @@ import { connect } from 'react-redux'
 import { HashRouter as Router,
   Link,
   Route,
-  Switch, } from 'react-router-dom'
+  Switch,
+  useHistory } from 'react-router-dom'
 
 
 
 import AlbumsList from './AlbumsList'
 import Album from './Album'
-import ArtistsList from './ArtistsLists'
+import ArtistsList from './ArtistsList'
 import Artist from './Artist'
+import ArtistAdd from './ArtistAdd'
+import Toaster from './Toaster'
 
 export class App extends React.Component {
 
@@ -27,9 +30,13 @@ export class App extends React.Component {
             <Route path="/albums" exact component={AlbumsList} />
             <Route path="/albums/:id"  component={Album} />
             <Route path="/artists" exact component={ArtistsList} />
-            <Route path="/artists/:id"  component={Artist} />
+            <Route path="/artist/add" exact component={ArtistAdd} />
+            <Route path="/artists/:id" component={Artist} />
           </Switch>
         </Router>
+        {this.props.toaster.message && (
+          <Toaster />
+        )}
       </div>
     )
   }
@@ -38,8 +45,8 @@ export class App extends React.Component {
 function mapStateToProps (globalState) {
   return {
     fruits: globalState.fruits,
-    albums: globalState.albums
-
+    albums: globalState.albums,
+    toaster: globalState.toaster
   }
 }
 

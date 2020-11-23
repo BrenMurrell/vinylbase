@@ -16,8 +16,5 @@ router.get('/', (req, res) => {
       res.status(500).json({ message: 'Somthing went wrong', error: err.message })
     })
 })
-router.get('/id', (req, res) => {
-  res.json(process.env.AWS_ACCESS_KEY_ID)
-})
 
 module.exports = router

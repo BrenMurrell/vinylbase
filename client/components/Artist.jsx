@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 import AlbumListItem from './AlbumListItem'
 import Modal from './Modal'
 
-import { fetchAlbumsByArtist } from '../actions/albums'
+import { fetchAlbumsByArtist, setArtistAlbums } from '../actions/albums'
 import { fetchArtist, removeArtist } from '../actions/artists'
-import { setToaster, clearToaster } from '../actions/toaster'
+import { setToaster } from '../actions/toaster'
 
 const Artist = (props) => {
-  const [modalVisible, setModalVisible] = useState(false)
+  const artistId = props.match.params.id
   
+  const [modalVisible, setModalVisible] = useState(false)
+  // const [artistAlbums, setArtistAlbums] = useState([])
+
   useEffect(() => {
-    const artistId = props.match.params.id
-    props.dispatch(fetchAlbumsByArtist(artistId))
     props.dispatch(fetchArtist(artistId))
+    props.dispatch(setArtistAlbums(props.albums.filter(album => album.artist == artistId)))
   }, [])
 
   const deleteThisArtist = () => {
@@ -35,9 +36,9 @@ const Artist = (props) => {
       <h2>{props.artist.name}</h2>
       <button className="btn" onClick={() => setModalVisible(true)}>Delete this artist</button>
       <div className="albums">
-        {props.albums.map(album => (
+        {props.artistAlbums.map(album =>
           <AlbumListItem key={album.id} album={album} />
-        ))}
+        )}
         { modalVisible && (
           <Modal title="Are you sure?">
             <p>Are you really sure you want to delete {props.artist.name}?</p>
@@ -56,7 +57,8 @@ const Artist = (props) => {
 const mapStateToProps = (globalState) => {
   return {
     albums: globalState.albums,
-    artist: globalState.artist
+    artist: globalState.artist,
+    artistAlbums: globalState.artistAlbums
   }
 }
 

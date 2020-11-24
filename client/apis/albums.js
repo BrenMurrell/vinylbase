@@ -38,3 +38,12 @@ export function addAlbumData (formData) {
       return res.body
     })
 }
+
+export function deleteAlbum (albumId) {
+  return request.delete(rootUrl + '/albums')
+    .send(albumId)
+    .then(res => {
+      return res.body
+    })
+
+}

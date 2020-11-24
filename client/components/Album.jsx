@@ -1,55 +1,79 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { fetchAlbum } from '../actions/albums'
+import Modal from './Modal'
 
-class Album extends React.Component {
-  state = {
-    album: {}
-  }
-  componentDidMount () {
-    const albumID = this.props.match.params.id
-    this.props.dispatch(fetchAlbum(albumID))
-  }
-  render() {
-    return (
-      <div className="album">
-        <h1>{this.props.album.album_name}</h1>
-        <div className="album-media">
-          <div className="album-media__block album-media__block--artwork">
-              <img src={this.props.album.image} alt={`Album art for ${this.props.album.name}`} className="album__art" />
+import { fetchAlbum, removeAlbum } from '../actions/albums'
+import { setToaster } from '../actions/toaster'
 
-          </div>
-          <div className="album-media__block album-media__block--media">
-              <iframe src={`https://open.spotify.com/embed/album/${this.props.album.spotifyId}`} width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-              </div>
-          <div className="album-media__block album-media__block--meta">
-            <dl>
-              <dt>Artist</dt>
-              <dd>
-                <Link to={`/artists/${this.props.album.artist}`}>
-                  {this.props.album.artist_name}
-                </Link>
-              </dd>
-              <dt>Condition</dt>
-              <dd>{this.props.album.condition}</dd>
-              <dt>Notes</dt>
-              <dd>{this.props.album.notes}</dd>
-            </dl>
-            <p>
-              <a href="/albums/6/edit" className="button button-primary">Edit this album</a>
-            </p>
-            <p>
-              <a href="/albums/6/delete" className="button button-primary">Delete this album</a>
-            </p>
-          </div>
-        </div>
-        
+
+
+const Album = (props) => {
+  const [modalVisible, setModalVisible] = useState(false)
+
+  const albumID = props.match.params.id
+
+  useEffect(() => {
+    props.dispatch(fetchAlbum(albumID))
+  }, [])
+
+  const deleteThisAlbum = () => {
+    props.dispatch(removeAlbum(props.album.id))
+    setModalVisible(false)
+    props.history.push('/albums')
+    const toaster = {
+      type: 'error',
+      message: `${props.album.name} deleted`,
+    }
+    props.dispatch(setToaster(toaster))
+  }
+
+  return (
+    <div className="album">
+      <h1>{props.album.album_name}</h1>
+      <div className="album-media">
+        <div className="album-media__block album-media__block--artwork">
+            <img src={props.album.image} alt={`Album art for ${props.album.name}`} className="album__art" />
 
         </div>
-    )
-  }
+        <div className="album-media__block album-media__block--media">
+            <iframe src={`https://open.spotify.com/embed/album/${props.album.spotifyId}`} width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
+        <div className="album-media__block album-media__block--meta">
+          <dl>
+            <dt>Artist</dt>
+            <dd>
+              <Link to={`/artists/${props.album.artist}`}>
+                {props.album.artist_name}
+              </Link>
+            </dd>
+            <dt>Condition</dt>
+            <dd>{props.album.condition}</dd>
+            <dt>Notes</dt>
+            <dd>{props.album.notes}</dd>
+          </dl>
+          <p>
+            <a href="/albums/6/edit" className="button button-primary">Edit this album</a>
+          </p>
+          <p>
+            <button className="btn btn-primary" onClick={() => setModalVisible(true)}>Delete this album</button>
+          </p>
+        </div>
+      </div>
+      
+      { modalVisible && (
+        <Modal title="Are you sure?">
+          <p>Are you really sure you want to delete {props.album.name}?</p>
+          <p>There is <strong><em>no</em></strong> undo</p>
+          <div className="buttons">
+            <button className="btn btn--warning" onClick={() => setModalVisible(false)}>Cancel</button>
+            <button className="btn btn--warning" onClick={() => deleteThisAlbum()}>Delete</button>
+          </div>
+        </Modal>
+      )}
+    </div>
+  )
 }
 
 const mapStateToProps = (globalState) => {

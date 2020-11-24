@@ -5,6 +5,7 @@ import albums from './albums'
 import album from './album'
 import artists from './artists'
 import artist from './artist'
+import artistAlbums from './artistAlbums'
 import toaster from './toaster'
 
 export default combineReducers({
@@ -13,4 +14,5 @@ export default combineReducers({
   artists,
   artist,
   toaster,
+  artistAlbums,
 })

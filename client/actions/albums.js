@@ -1,7 +1,9 @@
-import { getAlbums, getAlbum, getAlbumsByArtist, addAlbumArt, addAlbumData } from '../apis/albums'
+import { getAlbums, getAlbum, getAlbumsByArtist, addAlbumArt, addAlbumData, deleteAlbum } from '../apis/albums'
 
 export const SET_ALBUMS = 'SET_ALBUMS'
 export const SET_ALBUM = 'SET_ALBUM'
+export const SET_ARTIST_ALBUMS = 'SET_ARTIST_ALBUMS'
+export const ADD_ALBUM = 'ADD_ALBUM'
 
 export function setAlbum (album) {
   return {
@@ -10,6 +12,12 @@ export function setAlbum (album) {
   }
 }
 
+export function pushAlbum (album) {
+  return {
+    type: ADD_ALBUM,
+    album: album,
+  }
+}
 
 
 export function fetchAlbum(id) {
@@ -29,6 +37,14 @@ export function setAlbums (albums) {
   }
 }
 
+export function setArtistAlbums (albums) {
+  console.log('action albums', albums)
+  return {
+    type: SET_ARTIST_ALBUMS,
+    albums
+  }
+}
+
 export function fetchAlbums() {
   return dispatch => {
     return getAlbums()
@@ -43,7 +59,7 @@ export function fetchAlbumsByArtist(artistId) {
   return dispatch => {
     return getAlbumsByArtist(artistId)
       .then(albums => {
-        dispatch(setAlbums(albums))
+        dispatch(setArtistAlbums(albums))
         return null
       })
   }
@@ -55,12 +71,22 @@ export function addAlbum (formImage, formData) {
       .then(fileUrl => {
         formData.image = fileUrl
         return addAlbumData(formData)
-          .then(data => {
+          .then(album => {
+            dispatch(pushAlbum(formData))
             return null
           })
       })
       .catch(err => {
         console.log('error in actions: ', err.message)
+      })
+  }
+}
+
+export function removeAlbum (albumId) {
+  return dispatch => {
+    return deleteAlbum(albumId)
+      .then((num) => {
+        return null
       })
   }
 }

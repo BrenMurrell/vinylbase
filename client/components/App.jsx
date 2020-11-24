@@ -15,6 +15,8 @@ import Artist from './Artist'
 import ArtistAdd from './ArtistAdd'
 import Toaster from './Toaster'
 
+import AlbumAdd from './AlbumAdd'
+
 export class App extends React.Component {
 
   render () {
@@ -27,6 +29,7 @@ export class App extends React.Component {
           <Link to="/artists">Artists</Link>
           <Switch>
             {/* <Route path="/" component={Home} /> */}
+            <Route path="/album/add" exact component={AlbumAdd} />
             <Route path="/albums" exact component={AlbumsList} />
             <Route path="/albums/:id"  component={Album} />
             <Route path="/artists" exact component={ArtistsList} />

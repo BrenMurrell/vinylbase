@@ -22,3 +22,19 @@ export function getAlbumsByArtist (artistId) {
       return res.body
     })
 }
+
+export function addAlbumArt (formData) {
+  return request.post(rootUrl + '/albums/upload')
+    .send(formData)
+    .then(res => {
+      return res.text
+    })
+}
+
+export function addAlbumData (formData) {
+  return request.post(rootUrl + '/albums')
+    .send(formData)
+    .then(res => {
+      return res.body
+    })
+}

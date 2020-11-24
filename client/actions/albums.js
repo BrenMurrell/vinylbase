@@ -1,4 +1,4 @@
-import { getAlbums, getAlbum, getAlbumsByArtist } from '../apis/albums'
+import { getAlbums, getAlbum, getAlbumsByArtist, addAlbumArt, addAlbumData } from '../apis/albums'
 
 export const SET_ALBUMS = 'SET_ALBUMS'
 export const SET_ALBUM = 'SET_ALBUM'
@@ -9,6 +9,8 @@ export function setAlbum (album) {
     album: album,
   }
 }
+
+
 
 export function fetchAlbum(id) {
   return dispatch => {
@@ -43,6 +45,22 @@ export function fetchAlbumsByArtist(artistId) {
       .then(albums => {
         dispatch(setAlbums(albums))
         return null
+      })
+  }
+}
+
+export function addAlbum (formImage, formData) {
+  return dispatch => {
+    return addAlbumArt(formImage)
+      .then(fileUrl => {
+        formData.image = fileUrl
+        return addAlbumData(formData)
+          .then(data => {
+            return null
+          })
+      })
+      .catch(err => {
+        console.log('error in actions: ', err.message)
       })
   }
 }

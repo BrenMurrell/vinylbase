@@ -10,7 +10,6 @@ const Toaster = (props) => {
   }
 
   useEffect(() => {
-    //console.log('test mounted')
     setTimeout(() => {
       props.dispatch(clearToaster())
     }, 4000);

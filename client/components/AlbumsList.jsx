@@ -7,11 +7,11 @@ import AlbumListItem from './AlbumListItem'
 
 class AlbumsList extends React.Component {
   componentDidMount() {
-    if(this.props.albums == '') {
-      console.log('fetching albums from albums')
-      this.props.dispatch(fetchAlbums())
-      // props.dispatch(fetchAlbums())
-    }
+    // if(this.props.albums == '') {
+    //   console.log('fetching albums from albums')
+    //   this.props.dispatch(fetchAlbums())
+    //   // props.dispatch(fetchAlbums())
+    // }
   }
   render() {
     return(

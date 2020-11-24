@@ -63,4 +63,15 @@ router.post('/upload', upload.single('album_art'), function(req, res, next) {
   res.send(req.file.location)
 })
 
+router.delete('/:id', (req, res) => {
+  const id = req.params.id
+  return db.deleteAlbum(id)
+    .then(rows => {
+      res.json(rows)
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+})
+
 module.exports = router

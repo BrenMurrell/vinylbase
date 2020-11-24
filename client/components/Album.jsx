@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import Modal from './Modal'
 
-import { fetchAlbum, removeAlbum } from '../actions/albums'
+import { fetchAlbum, setAlbum, removeAlbum } from '../actions/albums'
 import { setToaster } from '../actions/toaster'
 
 
@@ -15,7 +15,13 @@ const Album = (props) => {
   const albumID = props.match.params.id
 
   useEffect(() => {
-    props.dispatch(fetchAlbum(albumID))
+    console.log(props.albums != '')
+    if(props.albums != '') {
+      const albumArray = props.albums.filter(album => album.id == albumID)
+      props.dispatch(setAlbum(albumArray[0]))
+    } else {
+      props.dispatch(fetchAlbum(albumID))
+    }
   }, [])
 
   const deleteThisAlbum = () => {
@@ -31,7 +37,7 @@ const Album = (props) => {
 
   return (
     <div className="album">
-      <h1>{props.album.album_name}</h1>
+      <h1>{props.album.name}</h1>
       <div className="album-media">
         <div className="album-media__block album-media__block--artwork">
             <img src={props.album.image} alt={`Album art for ${props.album.name}`} className="album__art" />
@@ -45,7 +51,7 @@ const Album = (props) => {
             <dt>Artist</dt>
             <dd>
               <Link to={`/artists/${props.album.artist}`}>
-                {props.album.artist_name}
+                {props.album.artist}
               </Link>
             </dd>
             <dt>Condition</dt>
@@ -78,7 +84,8 @@ const Album = (props) => {
 
 const mapStateToProps = (globalState) => {
   return {
-    album: globalState.album
+    album: globalState.album,
+    albums: globalState.albums
   }
 }
 

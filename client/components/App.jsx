@@ -17,15 +17,14 @@ import Toaster from './Toaster'
 import AlbumAdd from './AlbumAdd'
 
 import { fetchAlbums } from '../actions/albums'
+import { fetchArtists } from '../actions/artists'
 
 
 const App = (props) => {
   useEffect(() => {
     // console.log('albums?', props.albums == '')
-    if(props.albums == '') {
-      console.log('fetching albums from app')
-      props.dispatch(fetchAlbums())
-    }
+    props.dispatch(fetchAlbums())
+    props.dispatch(fetchArtists())
   }, [])
   return (
     <div className='wrapper'>
@@ -36,8 +35,8 @@ const App = (props) => {
         <Link to="/artists">Artists</Link>
         <Switch>
           {/* <Route path="/" component={Home} /> */}
-          <Route path="/album/add" exact component={AlbumAdd} />
           <Route path="/albums" exact component={AlbumsList} />
+          <Route path="/albums/add" exact component={AlbumAdd} />
           <Route path="/albums/:id"  component={Album} />
           <Route path="/artists" exact component={ArtistsList} />
           <Route path="/artist/add" exact component={ArtistAdd} />
@@ -55,6 +54,7 @@ function mapStateToProps (globalState) {
   return {
     fruits: globalState.fruits,
     albums: globalState.albums,
+    artists: globalState.artists,
     toaster: globalState.toaster
   }
 }

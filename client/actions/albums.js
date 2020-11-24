@@ -4,6 +4,7 @@ export const SET_ALBUMS = 'SET_ALBUMS'
 export const SET_ALBUM = 'SET_ALBUM'
 export const SET_ARTIST_ALBUMS = 'SET_ARTIST_ALBUMS'
 export const ADD_ALBUM = 'ADD_ALBUM'
+export const DELETE_ALBUM = 'DELETE_ALBUM'
 
 export function setAlbum (album) {
   return {
@@ -38,7 +39,6 @@ export function setAlbums (albums) {
 }
 
 export function setArtistAlbums (albums) {
-  console.log('action albums', albums)
   return {
     type: SET_ARTIST_ALBUMS,
     albums
@@ -71,7 +71,8 @@ export function addAlbum (formImage, formData) {
       .then(fileUrl => {
         formData.image = fileUrl
         return addAlbumData(formData)
-          .then(album => {
+          .then(albumId => {
+            formData.id = albumId
             dispatch(pushAlbum(formData))
             return null
           })
@@ -82,10 +83,18 @@ export function addAlbum (formImage, formData) {
   }
 }
 
+export function removeAlbumFromState(albumId) {
+  return {
+    type: DELETE_ALBUM,
+    albumId
+  }
+}
+
 export function removeAlbum (albumId) {
   return dispatch => {
     return deleteAlbum(albumId)
       .then((num) => {
+        dispatch(removeAlbumFromState(albumId))
         return null
       })
   }

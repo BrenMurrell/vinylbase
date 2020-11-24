@@ -5,7 +5,7 @@ import AlbumListItem from './AlbumListItem'
 import Modal from './Modal'
 
 import { fetchAlbumsByArtist, setArtistAlbums } from '../actions/albums'
-import { fetchArtist, removeArtist } from '../actions/artists'
+import { fetchArtist, setArtist, removeArtist } from '../actions/artists'
 import { setToaster } from '../actions/toaster'
 
 const Artist = (props) => {
@@ -15,8 +15,18 @@ const Artist = (props) => {
   // const [artistAlbums, setArtistAlbums] = useState([])
 
   useEffect(() => {
-    props.dispatch(fetchArtist(artistId))
-    props.dispatch(setArtistAlbums(props.albums.filter(album => album.artist == artistId)))
+
+    if(props.artists != '') {
+      const artistArray = props.artists.filter(artist => artist.id == artistId)
+      props.dispatch(setArtist(artistArray[0]))
+    } else {
+      props.dispatch(fetchArtist(artistId))
+    }
+    if(props.artists != '') {
+      props.dispatch(setArtistAlbums(props.albums.filter(album => album.artist == artistId)))
+    } else {
+      props.dispatch(fetchAlbumsByArtist(artistId))
+    }
   }, [])
 
   const deleteThisArtist = () => {
@@ -58,6 +68,7 @@ const mapStateToProps = (globalState) => {
   return {
     albums: globalState.albums,
     artist: globalState.artist,
+    artists: globalState.artists,
     artistAlbums: globalState.artistAlbums
   }
 }

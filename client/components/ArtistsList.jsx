@@ -9,7 +9,6 @@ class ArtistsList extends React.Component {
   componentDidMount() {
     // const artistId = this.props.match.params.id
 
-    this.props.dispatch(fetchArtists())
     // this.props.dispatch(fetchAlbumsByArtist(artistId))
   }
 

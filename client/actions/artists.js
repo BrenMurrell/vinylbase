@@ -4,6 +4,7 @@ export const SET_ARTISTS = 'SET_ARTISTS'
 export const SET_ARTIST = 'SET_ARTIST'
 export const ADD_ARTIST = 'ADD_ARTIST'
 export const RESET_ARTISTS = 'RESET_ARTISTS'
+export const RESET_ARTIST = 'RESET_ARTIST'
 export const DELETE_ARTIST = 'DELETE_ARTIST'
 export const ARTISTS_LOADED = 'ARTISTS_LOADED'
 

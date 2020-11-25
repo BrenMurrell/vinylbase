@@ -1,3 +1,25 @@
 .main-nav {
   margin-bottom: 0.8rem;
+  display: inline;
+
+  &__item {
+    border-radius: 0.4rem 0.4rem 0 0;
+    margin-right: 0.4rem;
+    display: inline-block;
+    line-height: 2.4rem;
+    padding: 0 2rem;
+    background-color: #1579e0;
+    color: white;
+    text-decoration: none;
+    &:hover {
+      background-color: lighten(#1579e0, 10%)
+    }
+    &--active {
+      background-color: #ffffff;
+      color: #222;
+      &:hover {
+        background-color: #ffffff;
+      }
+    }
+  }
 }

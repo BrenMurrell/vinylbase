@@ -28,22 +28,26 @@ const App = (props) => {
   }, [])
   return (
     <div className='wrapper'>
-      <h1>VinylBase</h1>
       {(props.ui.albumsLoaded && props.ui.artistsLoaded) && 
         <Router>
-          <nav className="main-nav">
-            <NavLink exact to="/" activeClassName="main-nav__item--active" className="main-nav__item">Home</NavLink>{' | '}
-            <NavLink to="/albums" activeClassName="main-nav__item--active" className="main-nav__item">Albums</NavLink>{' | '}
-            <NavLink to="/artists" activeClassName="main-nav__item--active" className="main-nav__item">Artists</NavLink>
-          </nav>
-          <Switch>
-            <Route path="/albums" exact component={AlbumsList} />
-            <Route path="/albums/add" exact component={AlbumAdd} />
-            <Route path="/albums/:id"  component={Album} />
-            <Route path="/artists" exact component={ArtistsList} />
-            <Route path="/artists/add" exact component={ArtistAdd} />
-            <Route path="/artists/:id" component={Artist} />
-          </Switch>
+          <header className="header">
+            <h1 className="app-title">VinylBase</h1>
+            <nav className="main-nav">
+              <NavLink exact to="/" activeClassName="main-nav__item--active" className="main-nav__item">Home</NavLink>
+              <NavLink to="/albums" activeClassName="main-nav__item--active" className="main-nav__item">Albums</NavLink>
+              <NavLink to="/artists" activeClassName="main-nav__item--active" className="main-nav__item">Artists</NavLink>
+            </nav>
+          </header>
+          <main className="main">
+            <Switch>
+              <Route path="/albums" exact component={AlbumsList} />
+              <Route path="/albums/add" exact component={AlbumAdd} />
+              <Route path="/albums/:id"  component={Album} />
+              <Route path="/artists" exact component={ArtistsList} />
+              <Route path="/artists/add" exact component={ArtistAdd} />
+              <Route path="/artists/:id" component={Artist} />
+            </Switch>
+          </main>
         </Router>
       } 
       {props.toaster.message && (

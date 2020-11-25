@@ -12,6 +12,11 @@
   &__inner {
     background-color: #fff;
     padding: 2.4rem;
+    width: 40rem;
+    height: auto;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: auto;
   }
 
   &__title {

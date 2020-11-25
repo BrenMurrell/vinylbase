@@ -1,0 +1,29 @@
+$col-copy-text: #3c3c3c;
+$col-copy-reverse: #ffffff;
+$col-bg-primary: #1579e0;
+$col-bg-warn: #e01515;
+
+.btn {
+  background-color: $col-bg-primary;
+  border: 1px solid $col-copy-reverse;
+  padding: 0.8rem;
+  display: inline-block;
+  text-decoration: none;
+  color: $col-copy-reverse;
+  transition-property: background-color;
+  transition-duration: 0.4s;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  &:hover {
+    background-color: lighten($col-bg-primary, 10%);
+  }
+
+  &--warning {
+    background-color: $col-bg-warn;
+    color: $col-copy-reverse;
+    &:hover {
+      background-color: lighten($col-bg-warn, 10%);
+    }
+  }
+
+}

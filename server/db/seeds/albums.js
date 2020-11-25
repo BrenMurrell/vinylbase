@@ -10,7 +10,7 @@ exports.seed = function(knex) {
         "artist": 1,
         "condition": "Average",
         "notes": "Vinyl in okay condition, sleeve fairly tatty.",
-        "image": "/images/darkside.jpg",
+        "image": "https://vinylbase.s3.amazonaws.com/images/darkside.jpg",
         "spotifyId": "4LH4d3cOWNNsVw41Gqt2kv"
       }, {
         "id": 2,
@@ -18,7 +18,7 @@ exports.seed = function(knex) {
         "artist": 3,
         "condition": "Excellent",
         "notes": "Includes full colour booklet with lyrics and original artwork.",
-        "image": "/images/war-of-the-worlds.jpg",
+        "image": "https://vinylbase.s3.amazonaws.com/images/war-of-the-worlds.jpg",
         "spotifyId": "7ligZljXfUtcKPCotWul5g"
       }, {
         "id": 3,
@@ -26,7 +26,7 @@ exports.seed = function(knex) {
         "artist": 4,
         "condition": "Great",
         "notes": "Bought from Greytown. Really good condition.",
-        "image": "/images/making-movies.jpg",
+        "image": "https://vinylbase.s3.amazonaws.com/images/making-movies.jpg",
         "spotifyId": "3wvclpO3LJmpSQGQ9gBa2a"
       }, {
         "id": 4,
@@ -34,7 +34,7 @@ exports.seed = function(knex) {
         "artist": 4,
         "condition": "Good",
         "notes": "Vinyl is in good condition, sleeve is pretty rough",
-        "image": "/images/dire-straits.jpg",
+        "image": "https://vinylbase.s3.amazonaws.com/images/dire-straits.jpg",
         "spotifyId": "2rCS6Xwx32V27pvgFzLzlT"
       }, {
         "id": 5,
@@ -42,7 +42,7 @@ exports.seed = function(knex) {
         "artist": 4,
         "condition": "Good",
         "notes": "Vinyl is in good condition, sleeve is pretty rough",
-        "image": "/images/love-over-gold.jpg",
+        "image": "https://vinylbase.s3.amazonaws.com/images/love-over-gold.jpg",
         "spotifyId": "4hJqOIahWodpSJU6uDgjvN"
       }, {
         "id": 6,
@@ -51,7 +51,7 @@ exports.seed = function(knex) {
         "condition": "Good",
         "notes": "n/a",
         "spotifyId": "6QaVfG1pHYl1z15ZxkvVDW",
-        "image": "/images/1603834552782sgtpeppers.jpeg"
+        "image": "https://vinylbase.s3.amazonaws.com/images/1603834552782sgtpeppers.jpeg"
       }, {
         "id": 7,
         "name": "Revolver",
@@ -59,7 +59,7 @@ exports.seed = function(knex) {
         "condition": "Good",
         "notes": "Cover is a bit rough otherwise okay",
         "spotifyId": "3PRoXYsngSwjEQWR5PsHWR",
-        "image": "/images/1603834581104revolver.jpeg"
+        "image": "https://vinylbase.s3.amazonaws.com/images/1603834581104revolver.jpeg"
       }, {
         "id": 8,
         "name": "III",
@@ -67,7 +67,7 @@ exports.seed = function(knex) {
         "condition": "New",
         "notes": "Bought new from the Warehouse. 180gm vinyl, recreation of original artwork with spinning disc",
         "spotifyId": "6P5QHz4XtxOmS5EuiGIPut",
-        "image": "/images/1603614106703led-zepp-iii.jpg"
+        "image": "https://vinylbase.s3.amazonaws.com/images/1603614106703led-zepp-iii.jpg"
       }, {
         "id": 9,
         "name": "Heartbeat City",
@@ -75,7 +75,7 @@ exports.seed = function(knex) {
         "condition": "Good",
         "notes": "",
         "spotifyId": "5ycnwHGkzOlTuMOI3Zh4iO",
-        "image": "/images/1603614663677heartbeat-city.jpg"
+        "image": "https://vinylbase.s3.amazonaws.com/images/1603614663677heartbeat-city.jpg"
       }, {
         "id": 10,
         "name": "Tracy Chapman",
@@ -83,7 +83,7 @@ exports.seed = function(knex) {
         "condition": "Good",
         "notes": "",
         "spotifyId": "6hmmX5UP4rIvOpGSaPerV8",
-        "image": "/images/1603657379736tracy-chapman.jpg"
+        "image": "https://vinylbase.s3.amazonaws.com/images/1603657379736tracy-chapman.jpg"
       }]);
     });
 };

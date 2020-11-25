@@ -1,7 +1,11 @@
-import { getAlbums, getAlbum, getAlbumsByArtist } from '../apis/albums'
+import { getAlbums, getAlbum, getAlbumsByArtist, addAlbumArt, addAlbumData, deleteAlbum } from '../apis/albums'
 
 export const SET_ALBUMS = 'SET_ALBUMS'
 export const SET_ALBUM = 'SET_ALBUM'
+export const SET_ARTIST_ALBUMS = 'SET_ARTIST_ALBUMS'
+export const ADD_ALBUM = 'ADD_ALBUM'
+export const DELETE_ALBUM = 'DELETE_ALBUM'
+export const ALBUMS_LOADED = 'ALBUMS_LOADED'
 
 export function setAlbum (album) {
   return {
@@ -9,6 +13,14 @@ export function setAlbum (album) {
     album: album,
   }
 }
+
+export function pushAlbum (album) {
+  return {
+    type: ADD_ALBUM,
+    album: album,
+  }
+}
+
 
 export function fetchAlbum(id) {
   return dispatch => {
@@ -27,11 +39,25 @@ export function setAlbums (albums) {
   }
 }
 
+export function setArtistAlbums (albums) {
+  return {
+    type: SET_ARTIST_ALBUMS,
+    albums
+  }
+}
+
+export const albumsLoaded = () => {
+  return {
+    type: ALBUMS_LOADED
+  }
+}
+
 export function fetchAlbums() {
   return dispatch => {
     return getAlbums()
       .then(albums => {
         dispatch(setAlbums(albums))
+        dispatch(albumsLoaded())
         return null
       })
   }
@@ -41,7 +67,42 @@ export function fetchAlbumsByArtist(artistId) {
   return dispatch => {
     return getAlbumsByArtist(artistId)
       .then(albums => {
-        dispatch(setAlbums(albums))
+        dispatch(setArtistAlbums(albums))
+        return null
+      })
+  }
+}
+
+export function addAlbum (formImage, formData) {
+  return dispatch => {
+    return addAlbumArt(formImage)
+      .then(fileUrl => {
+        formData.image = fileUrl
+        return addAlbumData(formData)
+          .then(albumId => {
+            formData.id = albumId
+            dispatch(pushAlbum(formData))
+            return null
+          })
+      })
+      .catch(err => {
+        console.log('error in actions: ', err.message)
+      })
+  }
+}
+
+export function removeAlbumFromState(albumId) {
+  return {
+    type: DELETE_ALBUM,
+    albumId
+  }
+}
+
+export function removeAlbum (albumId) {
+  return dispatch => {
+    return deleteAlbum(albumId)
+      .then((num) => {
+        dispatch(removeAlbumFromState(albumId))
         return null
       })
   }

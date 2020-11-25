@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { setToaster, clearToaster } from '../actions/toaster'
 
 const ArtistAdd = (props) => {
-  const [name, setName] = useState('initial name')
+  const [name, setName] = useState('')
   
   const onChange = (event) => {
     setName(event.target.value);
@@ -28,7 +28,10 @@ const ArtistAdd = (props) => {
     <div>
       <h2>Add a new artist</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="name" value={name} onChange={onChange} />
+        <label className="form__label" htmlFor="name">
+          <span className="form__label-title">Artist name</span>
+          <input type="text" name="name" value={name} onChange={onChange} required />
+        </label>
         <button className="btn">Submit</button>
       </form>
     </div>

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { HashRouter as Router,
-  Link,
+  NavLink,
   Route,
   Switch,
   useHistory } from 'react-router-dom'
@@ -14,39 +14,52 @@ import ArtistsList from './ArtistsList'
 import Artist from './Artist'
 import ArtistAdd from './ArtistAdd'
 import Toaster from './Toaster'
+import AlbumAdd from './AlbumAdd'
 
-export class App extends React.Component {
+import { fetchAlbums } from '../actions/albums'
+import { fetchArtists } from '../actions/artists'
 
-  render () {
-    return (
-      <div className='wrapper'>
-        <h1>Fullstack Boilerplate - with Albums!</h1>
+const App = (props) => {
+  useEffect(() => {
+    // console.log('albums?', props.albums == '')
+    props.dispatch(fetchAlbums())
+    props.dispatch(fetchArtists())
+    // props.dispatch(loadUi)
+  }, [])
+  return (
+    <div className='wrapper'>
+      <h1>VinylBase</h1>
+      {(props.ui.albumsLoaded && props.ui.artistsLoaded) && 
         <Router>
-          <Link to="/">Home</Link>{' | '}
-          <Link to="/albums">Albums</Link>{' | '}
-          <Link to="/artists">Artists</Link>
+          <nav className="main-nav">
+            <NavLink exact to="/" activeClassName="main-nav__item--active" className="main-nav__item">Home</NavLink>{' | '}
+            <NavLink to="/albums" activeClassName="main-nav__item--active" className="main-nav__item">Albums</NavLink>{' | '}
+            <NavLink to="/artists" activeClassName="main-nav__item--active" className="main-nav__item">Artists</NavLink>
+          </nav>
           <Switch>
-            {/* <Route path="/" component={Home} /> */}
             <Route path="/albums" exact component={AlbumsList} />
+            <Route path="/albums/add" exact component={AlbumAdd} />
             <Route path="/albums/:id"  component={Album} />
             <Route path="/artists" exact component={ArtistsList} />
-            <Route path="/artist/add" exact component={ArtistAdd} />
+            <Route path="/artists/add" exact component={ArtistAdd} />
             <Route path="/artists/:id" component={Artist} />
           </Switch>
         </Router>
-        {this.props.toaster.message && (
-          <Toaster />
-        )}
-      </div>
-    )
-  }
+      } 
+      {props.toaster.message && (
+        <Toaster />
+      )}
+    </div>
+  )
 }
 
 function mapStateToProps (globalState) {
   return {
     fruits: globalState.fruits,
     albums: globalState.albums,
-    toaster: globalState.toaster
+    artists: globalState.artists,
+    toaster: globalState.toaster,
+    ui: globalState.ui
   }
 }
 

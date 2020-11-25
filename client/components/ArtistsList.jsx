@@ -2,16 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { fetchArtists } from '../actions/artists'
-import { fetchAlbumsByArtist } from '../actions/albums'
 class ArtistsList extends React.Component {
-
-  componentDidMount() {
-    // const artistId = this.props.match.params.id
-
-    this.props.dispatch(fetchArtists())
-    // this.props.dispatch(fetchAlbumsByArtist(artistId))
-  }
 
   render() {
     return(
@@ -24,7 +15,7 @@ class ArtistsList extends React.Component {
             </Link>
           </p>
         ))}
-        <Link to={`/artist/add`}>Add a new artist</Link>
+        <Link className="btn" to={`/artists/add`}>Add a new artist</Link>
       </div>
     )
   }

@@ -5,6 +5,7 @@ export const SET_ALBUM = 'SET_ALBUM'
 export const SET_ARTIST_ALBUMS = 'SET_ARTIST_ALBUMS'
 export const ADD_ALBUM = 'ADD_ALBUM'
 export const DELETE_ALBUM = 'DELETE_ALBUM'
+export const ALBUMS_LOADED = 'ALBUMS_LOADED'
 
 export function setAlbum (album) {
   return {
@@ -45,11 +46,18 @@ export function setArtistAlbums (albums) {
   }
 }
 
+export const albumsLoaded = () => {
+  return {
+    type: ALBUMS_LOADED
+  }
+}
+
 export function fetchAlbums() {
   return dispatch => {
     return getAlbums()
       .then(albums => {
         dispatch(setAlbums(albums))
+        dispatch(albumsLoaded())
         return null
       })
   }

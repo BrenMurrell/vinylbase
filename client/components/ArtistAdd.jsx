@@ -30,7 +30,7 @@ const ArtistAdd = (props) => {
       <form onSubmit={handleSubmit}>
         <label className="form__label" htmlFor="name">
           <span className="form__label-title">Artist name</span>
-          <input type="text" name="name" value={name} onChange={onChange} />
+          <input type="text" name="name" value={name} onChange={onChange} required />
         </label>
         <button className="btn">Submit</button>
       </form>

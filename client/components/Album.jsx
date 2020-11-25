@@ -15,13 +15,8 @@ const Album = (props) => {
   const albumID = props.match.params.id
 
   useEffect(() => {
-    console.log(props.albums != '')
-    if(props.albums != '') {
-      const albumArray = props.albums.filter(album => album.id == albumID)
-      props.dispatch(setAlbum(albumArray[0]))
-    } else {
-      props.dispatch(fetchAlbum(albumID))
-    }
+    const albumArray = props.albums.filter(album => album.id == albumID)
+    props.dispatch(setAlbum(albumArray[0]))
   }, [])
 
   const deleteThisAlbum = () => {

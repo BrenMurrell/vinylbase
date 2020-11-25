@@ -7,9 +7,9 @@ const reducer = (state = initialState, action) => {
     case SET_ARTISTS:
       return action.artists
     case ADD_ARTIST:
-      return [...state, action.artist]
+      return [action.artist, ...state]
     case DELETE_ARTIST:
-      return state.filter(artist => artist.id !== action.id)
+      return state.filter(artist => artist.id !== action.artistId)
     case RESET_ARTISTS:
       return initialState
     default:

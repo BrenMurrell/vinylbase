@@ -1,25 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
-import { fetchAlbums } from '../actions/albums'
-
+import { Link } from 'react-router-dom'
 import AlbumListItem from './AlbumListItem'
 
 class AlbumsList extends React.Component {
-  componentDidMount() {
-    // if(this.props.albums == '') {
-    //   console.log('fetching albums from albums')
-    //   this.props.dispatch(fetchAlbums())
-    //   // props.dispatch(fetchAlbums())
-    // }
-  }
   render() {
     return(
-      <div className="albums">
-        {this.props.albums.map(album => (
-          <AlbumListItem album={album} key={album.id} />
-        ))}
-      </div>
+      <>
+        <Link className="btn" to="/albums/add">Add an album</Link>
+        <div className="albums">
+          {this.props.albums.map(album => (
+            <AlbumListItem album={album} key={album.id} />
+          ))}
+        </div>
+      </>
     )
   }
 }

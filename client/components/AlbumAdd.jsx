@@ -79,7 +79,7 @@ const AlbumAdd = (props) => {
           <input type="file" name="album_art" onChange={onChangeFile} />
         </label>
 
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn">Submit</button>
       </form>
     </div>
   )

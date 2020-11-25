@@ -12,21 +12,11 @@ const Artist = (props) => {
   const artistId = props.match.params.id
   
   const [modalVisible, setModalVisible] = useState(false)
-  // const [artistAlbums, setArtistAlbums] = useState([])
 
   useEffect(() => {
-
-    if(props.artists != '') {
-      const artistArray = props.artists.filter(artist => artist.id == artistId)
-      props.dispatch(setArtist(artistArray[0]))
-    } else {
-      props.dispatch(fetchArtist(artistId))
-    }
-    if(props.artists != '') {
-      props.dispatch(setArtistAlbums(props.albums.filter(album => album.artist == artistId)))
-    } else {
-      props.dispatch(fetchAlbumsByArtist(artistId))
-    }
+    const artistArray = props.artists.filter(artist => artist.id == artistId)
+    props.dispatch(setArtist(artistArray[0]))
+    props.dispatch(setArtistAlbums(props.albums.filter(album => album.artist == artistId)))
   }, [])
 
   const deleteThisArtist = () => {
@@ -44,7 +34,7 @@ const Artist = (props) => {
   return(
     <div>
       <h2>{props.artist.name}</h2>
-      <button className="btn" onClick={() => setModalVisible(true)}>Delete this artist</button>
+      <button className="btn btn--warning" onClick={() => setModalVisible(true)}>Delete this artist</button>
       <div className="albums">
         {props.artistAlbums.map(album =>
           <AlbumListItem key={album.id} album={album} />
@@ -52,9 +42,9 @@ const Artist = (props) => {
         { modalVisible && (
           <Modal title="Are you sure?">
             <p>Are you really sure you want to delete {props.artist.name}?</p>
-            <p>There is <strong><em>no</em></strong> undo</p>
+            <p>Note: this will NOT delete their albums (yet). Also there is <strong><em>no</em></strong> undo</p>
             <div className="buttons">
-              <button className="btn btn--warning" onClick={() => setModalVisible(false)}>Cancel</button>
+              <button className="btn btn--green" onClick={() => setModalVisible(false)}>Cancel</button>
               <button className="btn btn--warning" onClick={() => deleteThisArtist()}>Delete</button>
             </div>
           </Modal>

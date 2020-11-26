@@ -13,19 +13,18 @@ export const RESET_ARTIST_ALBUMS = 'RESET_ARTIST_ALBUMS'
 export function setAlbum (album) {
   return {
     type: SET_ALBUM,
-    album: album,
+    album: album
   }
 }
 
 export function pushAlbum (album) {
   return {
     type: ADD_ALBUM,
-    album: album,
+    album: album
   }
 }
 
-
-export function fetchAlbum(id) {
+export function fetchAlbum (id) {
   return dispatch => {
     return getAlbum(id)
       .then(album => {
@@ -55,7 +54,7 @@ export const albumsLoaded = () => {
   }
 }
 
-export function fetchAlbums() {
+export function fetchAlbums () {
   return dispatch => {
     return getAlbums()
       .then(albums => {
@@ -66,7 +65,7 @@ export function fetchAlbums() {
   }
 }
 
-export function fetchAlbumsByArtist(artistId) {
+export function fetchAlbumsByArtist (artistId) {
   return dispatch => {
     return getAlbumsByArtist(artistId)
       .then(albums => {
@@ -94,7 +93,7 @@ export function addAlbum (formImage, formData) {
   }
 }
 
-export function removeAlbumFromState(albumId) {
+export function removeAlbumFromState (albumId) {
   return {
     type: DELETE_ALBUM,
     albumId

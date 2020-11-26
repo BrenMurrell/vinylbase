@@ -8,7 +8,7 @@ describe('artist.js reducer tests', () => {
   test('initial state', () => {
     const expected = {}
     const actual = artist(undefined, {})
-  
+
     expect(actual).toEqual(expected)
   })
 
@@ -18,7 +18,7 @@ describe('artist.js reducer tests', () => {
     const action = {
       type: SET_ARTIST,
       artist: artistData
-    } 
+    }
     const actual = artist(undefined, action).name
 
     expect(actual).toEqual(expected)
@@ -32,5 +32,4 @@ describe('artist.js reducer tests', () => {
     const actual = artist(artistData, action)
     expect(actual).toEqual(expected)
   })
-
 })

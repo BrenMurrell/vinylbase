@@ -6,7 +6,7 @@ const db = require('../db/dbFunctions')
 router.get('/', (req, res) => {
   return db.getChangesAll()
     .then(changes => {
-      res.json(changes)
+      return res.json(changes)
     })
     .catch(err => {
       console.log(err.message)

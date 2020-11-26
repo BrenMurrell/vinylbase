@@ -3,7 +3,7 @@ import { data as allData } from './mock-data'
 import artists from './artists'
 const data = allData.artists
 
-jest.retryTimes(0);
+jest.retryTimes(0)
 
 describe('artist.js reducer tests', () => {
   test('initial state', () => {

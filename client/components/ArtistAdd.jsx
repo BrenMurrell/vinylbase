@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import { insertArtist } from '../actions/artists'
 import { connect } from 'react-redux'
 
-import { setToaster, clearToaster } from '../actions/toaster'
+import { setToaster } from '../actions/toaster'
 
 const ArtistAdd = (props) => {
   const [name, setName] = useState('')
-  
+
   const onChange = (event) => {
-    setName(event.target.value);
-  };
-  
+    setName(event.target.value)
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
     const artist = { name: name }
@@ -19,7 +19,7 @@ const ArtistAdd = (props) => {
 
     const toaster = {
       type: 'standard',
-      message: `${name} added`,
+      message: `${name} added`
     }
     props.dispatch(setToaster(toaster))
   }

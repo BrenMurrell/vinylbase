@@ -50,11 +50,11 @@ export function removeArtist (artistId) {
       })
   }
 }
- export const artistsLoaded = () => {
-   return {
-     type: ARTISTS_LOADED
-   }
- }
+export const artistsLoaded = () => {
+  return {
+    type: ARTISTS_LOADED
+  }
+}
 
 export function fetchArtist (id) {
   return dispatch => {
@@ -66,10 +66,10 @@ export function fetchArtist (id) {
   }
 }
 
-export function setArtists(artists) {
+export function setArtists (artists) {
   return {
     type: SET_ARTISTS,
-    artists: artists,
+    artists: artists
   }
 }
 

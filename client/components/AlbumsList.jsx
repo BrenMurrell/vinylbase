@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import AlbumListItem from './AlbumListItem'
 
 class AlbumsList extends React.Component {
-  render() {
-    return(
+  render () {
+    return (
       <>
         <Link className="btn" to="/albums/add">Add an album</Link>
         <div className="albums">

@@ -4,10 +4,8 @@ import { Link } from 'react-router-dom'
 
 import Modal from './Modal'
 
-import { fetchAlbum, setAlbum, removeAlbum } from '../actions/albums'
+import { setAlbum, removeAlbum } from '../actions/albums'
 import { setToaster } from '../actions/toaster'
-
-
 
 const Album = (props) => {
   const [modalVisible, setModalVisible] = useState(false)
@@ -25,7 +23,7 @@ const Album = (props) => {
     props.history.push('/albums')
     const toaster = {
       type: 'error',
-      message: `${props.album.name} deleted`,
+      message: `${props.album.name} deleted`
     }
     props.dispatch(setToaster(toaster))
   }
@@ -35,17 +33,18 @@ const Album = (props) => {
       <h1>{props.album.name}</h1>
       <div className="album-media">
         <div className="album-media__block album-media__block--artwork">
-            <img src={props.album.image} alt={`Album art for ${props.album.name}`} className="album__art" />
+          <img src={props.album.image} alt={`Album art for ${props.album.name}`} className="album__art" />
 
         </div>
         <div className="album-media__block album-media__block--media">
-            <iframe src={`https://open.spotify.com/embed/album/${props.album.spotifyId}`} width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-            </div>
+          <iframe src={`https://open.spotify.com/embed/album/${props.album.spotifyId}`} width="300" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
         <div className="album-media__block album-media__block--meta">
           <dl>
             <dt>Artist</dt>
             <dd>
               <Link to={`/artists/${props.album.artist}`}>
+                {/* TODO-BPM: fix so artist is a NAME not an ID */}
                 {props.album.artist}
               </Link>
             </dd>
@@ -62,7 +61,7 @@ const Album = (props) => {
           </p>
         </div>
       </div>
-      
+
       { modalVisible && (
         <Modal title="Are you sure?">
           <p>Are you really sure you want to delete {props.album.name}?</p>

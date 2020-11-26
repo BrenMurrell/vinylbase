@@ -2,7 +2,7 @@ const dbFunctions = require('./dbFunctions')
 const knex = require('knex')
 const config = require('./knexfile')
 const env = process.env.NODE_ENV
-let testDb = knex(config[env])
+const testDb = knex(config[env])
 
 beforeAll(() => {
 })
@@ -14,19 +14,19 @@ beforeEach(() => {
     })
 })
 describe('Initialise test suite', () => {
-  test('test suite is jacked in', () => {
+  test('suite is jacked in', () => {
     expect(true).toBeTruthy()
   })
 })
 
 describe('Artists database tests:', () => {
   test('CREATE: can add an artist', () => {
-    const expected = "Test artist"
+    const expected = 'Test artist'
     const newArtist = {
-      name: "Test artist"
+      name: 'Test artist'
     }
     return dbFunctions.addArtist(newArtist, testDb)
-      //.then(() => dbFunctions.getArtistById(10, testDb)) //remember the anonymous function here! () => 
+      // .then(() => dbFunctions.getArtistById(10, testDb)) //remember the anonymous function here! () =>
       .then((ids) => {
         return dbFunctions.getArtistById(ids[0], testDb)
       })
@@ -35,16 +35,16 @@ describe('Artists database tests:', () => {
         expect(actual).toEqual(expected)
       })
   })
- 
+
   test('READ: can query all artists', () => {
-    const expected = [1,2,3,4,6,7,8,9]
+    const expected = [1, 2, 3, 4, 6, 7, 8, 9]
     return dbFunctions.getArtistsAll('id', testDb)
       .then(artists => {
         const actual = artists.map(artist => artist.id)
         expect(actual).toEqual(expected)
       })
   })
-  
+
   test('READ: can query artist by Id (2)', () => {
     const expected = 'The Beatles'
     return dbFunctions.getArtistById(2, testDb)
@@ -63,7 +63,7 @@ describe('Artists database tests:', () => {
   })
 
   test('UPDATE: can edit an artist', () => {
-    const expected = {id: 2, name: 'Updated name'}
+    const expected = { id: 2, name: 'Updated name' }
     const newData = {
       name: 'Updated name'
     }
@@ -76,9 +76,9 @@ describe('Artists database tests:', () => {
   })
 
   test('DELETE: can delete an artist', () => {
-    const expected = [1,2,3,4,7,8,9]
+    const expected = [1, 2, 3, 4, 7, 8, 9]
     return dbFunctions.deleteArtist(6, testDb)
-      .then(() => dbFunctions.getArtistsAll('id', testDb)) //remember the anonymous function here! () => 
+      .then(() => dbFunctions.getArtistsAll('id', testDb)) // remember the anonymous function here! () =>
       .then(artists => {
         const actual = artists.map(artist => artist.id)
         expect(actual).toEqual(expected)
@@ -89,13 +89,13 @@ describe('Artists database tests:', () => {
 describe('Albums database tests', () => {
   test('CREATE: can create a new album', () => {
     const newAlbum = {
-      "id": 9999,
-      "name": "New album",
-      "artist": 8,
-      "condition": "Good",
-      "notes": "None",
-      "spotifyId": "6hmmX5UP4rIvOpGSaPerV8",
-      "image": "/images/test.jpg"
+      id: 9999,
+      name: 'New album',
+      artist: 8,
+      condition: 'Good',
+      notes: 'None',
+      spotifyId: '6hmmX5UP4rIvOpGSaPerV8',
+      image: '/images/test.jpg'
     }
     const expected = newAlbum.name
     return dbFunctions.addAlbum(newAlbum, testDb)
@@ -107,18 +107,18 @@ describe('Albums database tests', () => {
           })
       })
   })
-  
+
   test('READ: can select all albums', () => {
-    const expected = [1,2,3,4,5,6,7,8,9,10]
+    const expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     return dbFunctions.getAlbumsAll('id', testDb)
       .then(albums => {
         const actual = albums.map(album => album.id)
         expect(actual).toEqual(expected)
       })
   })
-  
+
   test('READ: can select album by id', () => {
-    const expected = "Heartbeat City"
+    const expected = 'Heartbeat City'
     return dbFunctions.getAlbumById(9, testDb)
       .then(album => {
         const actual = album.name
@@ -127,29 +127,28 @@ describe('Albums database tests', () => {
   })
 
   test('READ: can select albums by artist id', () => {
-    const expected = ["Making Movies", "Dire Straits", "Love Over Gold"]
+    const expected = ['Making Movies', 'Dire Straits', 'Love Over Gold']
     return dbFunctions.getAlbumsByArtist(4, 'id', testDb)
       .then(albumData => {
         const actual = albumData.map(album => album.name)
-        
+
         expect(actual).toEqual(expected)
       })
   })
 
-
   test('READ: can select albums by artist id and sort by name', () => {
-    const expected = ["Dire Straits", "Love Over Gold", "Making Movies"]
-    return dbFunctions.getAlbumsByArtist(4, "name", testDb)
+    const expected = ['Dire Straits', 'Love Over Gold', 'Making Movies']
+    return dbFunctions.getAlbumsByArtist(4, 'name', testDb)
       .then(albumData => {
         const actual = albumData.map(album => album.name)
-        
+
         expect(actual).toEqual(expected)
       })
   })
 
   test('UPDATE: can update an album', () => {
-    const expected = "New name for album"
-    const newData = { name: "New name for album" }
+    const expected = 'New name for album'
+    const newData = { name: 'New name for album' }
     return dbFunctions.updateAlbum(8, newData, testDb)
       .then(() => {
         dbFunctions.getAlbumById(8, testDb)
@@ -162,7 +161,7 @@ describe('Albums database tests', () => {
 
   test('DELETE: can delete an album by id', () => {
     const albumToDelete = 6
-    const expected = [1,2,3,4,5,7,8,9,10]
+    const expected = [1, 2, 3, 4, 5, 7, 8, 9, 10]
     return dbFunctions.deleteAlbum(albumToDelete, testDb)
       .then(() => {
         return dbFunctions.getAlbumsAll('id', testDb)
@@ -174,9 +173,7 @@ describe('Albums database tests', () => {
   })
 })
 
-
-describe('Changelog tests run' , () => {
-
+describe('Changelog tests run', () => {
   test('CREATE: can create a new changelog item', () => {
     const newChangelog = {
       description: 'Create a new changelog item',
@@ -231,7 +228,7 @@ describe('Changelog tests run' , () => {
 
   test('DELETE: can delete a changelog', () => {
     const changeId = 3
-    const expected = [4,2,1]
+    const expected = [4, 2, 1]
     return dbFunctions.deleteChangelog(changeId, testDb)
       .then(id => {
         return dbFunctions.getChangesAll(testDb)

@@ -1,5 +1,4 @@
-
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.createTable('albums', (table) => {
     table.increments('id')
     table.string('name')
@@ -9,8 +8,8 @@ exports.up = function(knex) {
     table.string('image')
     table.string('spotifyId')
   })
-};
+}
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable('albums')
-};
+}

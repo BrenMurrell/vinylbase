@@ -3,7 +3,7 @@ import { SET_ARTISTS, ADD_ARTIST, RESET_ARTISTS, DELETE_ARTIST } from '../action
 const initialState = []
 
 const reducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case SET_ARTISTS:
       return action.artists
     case ADD_ARTIST:

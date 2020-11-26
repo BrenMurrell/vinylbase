@@ -8,7 +8,7 @@ describe('album.js reducer tests', () => {
   test('initial state', () => {
     const expected = {}
     const actual = album(undefined, {})
-  
+
     expect(actual).toEqual(expected)
   })
 
@@ -19,7 +19,7 @@ describe('album.js reducer tests', () => {
     const action = {
       type: SET_ALBUM,
       album: albumData
-    } 
+    }
     const actual = album(undefined, action).name
 
     expect(actual).toEqual(expected)
@@ -33,5 +33,4 @@ describe('album.js reducer tests', () => {
     const actual = album(initialState, action)
     expect(actual).toEqual(expected)
   })
-
 })

@@ -38,15 +38,16 @@ function deleteArtist(id, db = connection) {
 function getAlbumsAll(orderField = 'name', db = connection) {
   return db('albums')
     .select()
+    // .join()
     .orderBy(orderField)
 }
 
 function getAlbumById(id, db = connection) {
-  return db('albums')
-    .select('artists.name as artist_name', 'albums.name as album_name', '*')
+  return db('artists')
+    .select('artists.name as artist_name', 'albums.name as album_name', 'albums.id as album_id', 'artists.id as artist_id', '*')
     .first()
-    .join('artists', 'artists.id', 'albums.artist')
-    .where('albums.id', id)
+    .join('albums', 'albums.artist', 'artists.id')
+    .where('album_id', id)
 }
 
 function getAlbumsByArtist(artistId, orderField = 'name', db = connection) {

@@ -1,3 +1,8 @@
+![](./coverage/badge-branches.svg)
+![](./coverage/badge-lines.svg)
+![](./coverage/badge-statements.svg)
+![](./coverage/badge-functions.svg)
+
 # Fullstack boilerplate
 
 ## Getting Started

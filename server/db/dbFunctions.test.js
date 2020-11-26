@@ -89,6 +89,7 @@ describe('Artists database tests:', () => {
 describe('Albums database tests', () => {
   test('CREATE: can create a new album', () => {
     const newAlbum = {
+      "id": 9999,
       "name": "New album",
       "artist": 8,
       "condition": "Good",
@@ -98,8 +99,8 @@ describe('Albums database tests', () => {
     }
     const expected = newAlbum.name
     return dbFunctions.addAlbum(newAlbum, testDb)
-      .then((ids) => {
-        return dbFunctions.getAlbumById(ids[0], testDb)
+      .then((count) => {
+        return dbFunctions.getAlbumById(newAlbum.id, testDb)
           .then(album => {
             const actual = album.name
             expect(actual).toEqual(expected)

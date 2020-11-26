@@ -1,8 +1,6 @@
 const express = require('express')
 const path = require('path')
 
-const fruitRoutes = require('./routes/fruits')
-
 const server = express()
 
 server.use(express.json())

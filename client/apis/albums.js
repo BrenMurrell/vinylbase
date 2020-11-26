@@ -45,5 +45,4 @@ export function deleteAlbum (albumId) {
     .then(res => {
       return res.body
     })
-
 }

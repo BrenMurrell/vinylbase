@@ -4,44 +4,42 @@ import { fetchArtists } from '../actions/artists'
 
 import { connect } from 'react-redux'
 
-
 const AlbumAdd = (props) => {
   const [albumArt, setAlbumArt] = useState(null)
   const [albumTitle, setAlbumTitle] = useState('')
-  const [albumArtist, setAlbumArtist ] = useState('')
-  const [albumCondition, setAlbumCondition ] = useState('')
-  const [albumNotes, setAlbumNotes ] = useState('')
-  const [albumSpotifyId, setAlbumSpotifyId ] = useState('')
-  
+  const [albumArtist, setAlbumArtist] = useState('')
+  const [albumCondition, setAlbumCondition] = useState('')
+  const [albumNotes, setAlbumNotes] = useState('')
+  const [albumSpotifyId, setAlbumSpotifyId] = useState('')
+
   useEffect(() => {
     props.dispatch(fetchArtists())
   }, [])
-  
+
   const onChangeFile = (e) => {
-    setAlbumArt(e.target.files[0]);
+    setAlbumArt(e.target.files[0])
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    
-    //handle image first
-    let formImage = new FormData()
-    formImage.append("album_art", albumArt)
-    
-    //handle other form data (album art added in action)    
-    let formData = {
-      "name": albumTitle,
-      "artist": albumArtist,
-      "condition": albumCondition,
-      "notes": albumNotes,
-      "spotifyId": albumSpotifyId,
+
+    // handle image first
+    const formImage = new FormData()
+    formImage.append('album_art', albumArt)
+
+    // handle other form data (album art added in action)
+    const formData = {
+      name: albumTitle,
+      artist: albumArtist,
+      condition: albumCondition,
+      notes: albumNotes,
+      spotifyId: albumSpotifyId
     }
 
     props.dispatch(addAlbum(formImage, formData))
- 
   }
 
-  return(
+  return (
     <div className="album-add">
       <form encType='multipart/form-data' onSubmit={handleSubmit}>
         <label className="form__label" htmlFor="album_title">
@@ -55,7 +53,7 @@ const AlbumAdd = (props) => {
             <option value="">Select one...</option>
             {props.artists.map(artist => {
               return <option key={artist.id} value={artist.id}>{artist.name}</option>
-            })} 
+            })}
           </select>
         </label>
 
@@ -79,7 +77,7 @@ const AlbumAdd = (props) => {
           <input type="file" name="album_art" onChange={onChangeFile} />
         </label>
 
-        <button type="submit" class="btn">Submit</button>
+        <button type="submit" className="btn">Submit</button>
       </form>
     </div>
   )

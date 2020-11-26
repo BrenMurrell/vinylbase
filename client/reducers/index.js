@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 
-import fruits from './fruits'
 import albums from './albums'
 import album from './album'
 import artists from './artists'
@@ -16,5 +15,5 @@ export default combineReducers({
   artist,
   toaster,
   artistAlbums,
-  ui,
+  ui
 })

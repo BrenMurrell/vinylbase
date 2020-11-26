@@ -1,33 +1,32 @@
-
-exports.seed = function(knex) {
+exports.seed = function (knex) {
   // Deletes ALL existing entries
   return knex('artists').del()
     .then(function () {
       // Inserts seed entries
       return knex('artists').insert([{
-        "id": 1,
-        "name": "Pink Floyd"
+        id: 1,
+        name: 'Pink Floyd'
       }, {
-        "id": 2,
-        "name": "The Beatles"
+        id: 2,
+        name: 'The Beatles'
       }, {
-        "id": 3,
-        "name": "Jeff Wayne"
+        id: 3,
+        name: 'Jeff Wayne'
       }, {
-        "id": 4,
-        "name": "Dire Straits"
+        id: 4,
+        name: 'Dire Straits'
       }, {
-        "id": 6,
-        "name": "The Cars"
+        id: 6,
+        name: 'The Cars'
       }, {
-        "id": 7,
-        "name": "Led Zeppelin"
+        id: 7,
+        name: 'Led Zeppelin'
       }, {
-        "id": 8,
-        "name": "Tracy Chapman"
+        id: 8,
+        name: 'Tracy Chapman'
       }, {
-        "id": 9,
-        "name": "Jean-Michel Jarre"
-      }]);
-    });
-};
+        id: 9,
+        name: 'Jean-Michel Jarre'
+      }])
+    })
+}

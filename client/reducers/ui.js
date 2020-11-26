@@ -7,11 +7,11 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case ARTISTS_LOADED:
-      return {...state, artistsLoaded: true }
+      return { ...state, artistsLoaded: true }
     case ALBUMS_LOADED:
-      return {...state, albumsLoaded: true }
+      return { ...state, albumsLoaded: true }
     default:
       return state
   }

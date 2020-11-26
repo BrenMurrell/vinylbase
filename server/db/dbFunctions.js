@@ -4,29 +4,29 @@ const env = process.env.NODE_ENV || 'development'
 
 const connection = knex(config[env])
 
-function getArtistsAll(orderField = 'name', db = connection) {
+function getArtistsAll (orderField = 'name', db = connection) {
   return db('artists').select()
     .orderBy(orderField)
 }
 
-function getArtistById(id, db = connection){
+function getArtistById (id, db = connection) {
   return db('artists')
     .select()
     .where('artists.id', id)
     .first()
 }
 
-function addArtist(artist, db = connection) {
+function addArtist (artist, db = connection) {
   return db('artists').insert(artist)
 }
 
-function updateArtist(id, data, db = connection) {
+function updateArtist (id, data, db = connection) {
   return db('artists')
     .update(data)
     .where('id', id)
 }
 
-function deleteArtist(id, db = connection) {
+function deleteArtist (id, db = connection) {
   return db('artists')
     .del()
     .where('id', id)
@@ -35,14 +35,14 @@ function deleteArtist(id, db = connection) {
     })
 }
 
-function getAlbumsAll(orderField = 'name', db = connection) {
+function getAlbumsAll (orderField = 'name', db = connection) {
   return db('albums')
     .select()
     // .join()
     .orderBy(orderField)
 }
 
-function getAlbumById(id, db = connection) {
+function getAlbumById (id, db = connection) {
   return db('artists')
     .select('artists.name as artist_name', 'albums.name as album_name', 'albums.id as album_id', 'artists.id as artist_id', '*')
     .first()
@@ -50,25 +50,25 @@ function getAlbumById(id, db = connection) {
     .where('album_id', id)
 }
 
-function getAlbumsByArtist(artistId, orderField = 'name', db = connection) {
+function getAlbumsByArtist (artistId, orderField = 'name', db = connection) {
   return db('albums')
     .select()
     .where('artist', artistId)
     .orderBy(orderField)
 }
 
-function updateAlbum(albumId, newData, db = connection) {
+function updateAlbum (albumId, newData, db = connection) {
   return db('albums')
     .update(newData)
     .where('id', albumId)
 }
 
-function addAlbum(newAlbum, db = connection) {
+function addAlbum (newAlbum, db = connection) {
   return db('albums')
     .insert(newAlbum)
 }
 
-function deleteAlbum(albumId, db = connection) {
+function deleteAlbum (albumId, db = connection) {
   return db('albums')
     .del()
     .where('id', albumId)
@@ -120,5 +120,5 @@ module.exports = {
   getChangesById,
   addChangelog,
   updateChangelog,
-  deleteChangelog,
+  deleteChangelog
 }

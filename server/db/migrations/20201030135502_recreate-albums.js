@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.dropTable('albums')
     .then(() => {
       return knex.schema.createTable('albums', (table) => {
@@ -11,9 +11,8 @@ exports.up = function(knex) {
         table.string('spotifyId')
       })
     })
-};
+}
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable('albums')
-};
-
+}

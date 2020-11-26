@@ -9,7 +9,7 @@ const reducer = (state = initialState, action) => {
     case ADD_ALBUM:
       return [...state, action.album]
     case DELETE_ALBUM:
-      return state.filter(album => album.id != action.albumId)
+      return state.filter(album => album.id !== action.albumId)
     case RESET_ALBUMS:
       return initialState
     default:

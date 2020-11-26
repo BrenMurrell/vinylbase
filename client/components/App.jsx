@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { HashRouter as Router,
+import {
+  HashRouter as Router,
   NavLink,
   Route,
-  Switch,
-  useHistory } from 'react-router-dom'
-
-
+  Switch
+} from 'react-router-dom'
 
 import AlbumsList from './AlbumsList'
 import Album from './Album'
@@ -28,7 +27,7 @@ const App = (props) => {
   }, [])
   return (
     <div className='wrapper'>
-      {(props.ui.albumsLoaded && props.ui.artistsLoaded) && 
+      {(props.ui.albumsLoaded && props.ui.artistsLoaded) &&
         <Router>
           <header className="header">
             <h1 className="app-title">VinylBase</h1>
@@ -42,14 +41,14 @@ const App = (props) => {
             <Switch>
               <Route path="/albums" exact component={AlbumsList} />
               <Route path="/albums/add" exact component={AlbumAdd} />
-              <Route path="/albums/:id"  component={Album} />
+              <Route path="/albums/:id" component={Album} />
               <Route path="/artists" exact component={ArtistsList} />
               <Route path="/artists/add" exact component={ArtistAdd} />
               <Route path="/artists/:id" component={Artist} />
             </Switch>
           </main>
         </Router>
-      } 
+      }
       {props.toaster.message && (
         <Toaster />
       )}
@@ -59,7 +58,6 @@ const App = (props) => {
 
 function mapStateToProps (globalState) {
   return {
-    fruits: globalState.fruits,
     albums: globalState.albums,
     artists: globalState.artists,
     toaster: globalState.toaster,

@@ -1,0 +1,13 @@
+name: CI - Tests & Linting
+on: pull_request
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: npm install
+    - name: Run tests
+      run: npm run test
+    - name: Run Linter
+      run: npm run lint

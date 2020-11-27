@@ -7,15 +7,16 @@ box-shadow: 0 0 0 rgba(0, 0, 0, 0.4);
 transition: all 0.4s ease-in-out;
 }
 
-.album__art-link:hover .album__art {
+.album-tile:hover .album__art {
   transform: perspective(1000px) translateZ(0px) translateX(0px) translateY(0px) rotateY(-60deg);
   box-shadow: 23px 1px 12px rgba(0, 0, 0, 0.4)
 }
 
 .album__art-link {
   display: block;
-  background: #d3d3d3;
+  background-color: #d3d3d3;
   // background-image: url("../../server/public/images/lp-image.png");
+  background-image: url("https://vinylbase.s3-ap-southeast-2.amazonaws.com/images/lp-image.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -31,23 +32,34 @@ dt {
 
 }
 
-.album {
+.album-tile {
   flex: 0 0 100%;
   padding: 1rem;
   width: 100%;
-}
 
-@media screen and (min-width: 640px) {
-  .album {
+  @media screen and (min-width: 640px) {
     flex: 0 0 33%;
   }
-}
 
-@media screen and (min-width: 1200px) {
-  .album {
+  @media screen and (min-width: 1200px) {
     flex: 0 0 20%;
   }
+
+  &__name {
+    background-color: #d3d3d3;
+    text-align: center;
+    margin: 0;
+
+    a{
+      color: #222;
+      text-decoration: none;
+      display: block;
+      padding: 0.4rem;
+    }
+  }
 }
+
+
 
 .album-media {
   display: flex;

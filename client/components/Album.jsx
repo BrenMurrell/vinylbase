@@ -10,10 +10,10 @@ import { setToaster } from '../actions/toaster'
 const Album = (props) => {
   const [modalVisible, setModalVisible] = useState(false)
 
-  const albumID = props.match.params.id
+  const albumID = parseInt(props.match.params.id)
 
   useEffect(() => {
-    const albumArray = props.albums.filter(album => album.id == albumID)
+    const albumArray = props.albums.filter(album => album.id === albumID)
     props.dispatch(setAlbum(albumArray[0]))
   }, [])
 

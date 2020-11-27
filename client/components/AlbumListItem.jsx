@@ -5,11 +5,11 @@ const AlbumListItem = (props) => {
   const { album } = props
 
   return (
-    <div className="album">
+    <div className="album-tile">
       <Link to={`/albums/${album.id}`} className="album__art-link">
         <img src={album.image} alt="Album art for Dark Side of the Moon" className="album__art" />
       </Link>
-      <p><Link to={`/albums/${album.id}`}>{album.name}</Link></p>
+      <p className="album-tile__name"><Link to={`/albums/${album.id}`}>{album.name}</Link></p>
     </div>
   )
 }

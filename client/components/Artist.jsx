@@ -9,16 +9,14 @@ import { setArtist, removeArtist } from '../actions/artists'
 import { setToaster } from '../actions/toaster'
 
 const Artist = (props) => {
-  const artistId = props.match.params.id
+  const artistId = parseInt(props.match.params.id)
 
   const [modalVisible, setModalVisible] = useState(false)
 
   useEffect(() => {
-    // TODO-BPM: fix == (string vs number)
-    const artistArray = props.artists.filter(artist => artist.id == artistId)
-    // console.log(artistId, typeof artistId, artistArray[0].id, typeof artistArray[0].id)
+    const artistArray = props.artists.filter(artist => artist.id === artistId)
     props.dispatch(setArtist(artistArray[0]))
-    props.dispatch(setArtistAlbums(props.albums.filter(album => album.artist == artistId)))
+    props.dispatch(setArtistAlbums(props.albums.filter(album => album.artist === artistId)))
   }, [])
 
   const deleteThisArtist = () => {

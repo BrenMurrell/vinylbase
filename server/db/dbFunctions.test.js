@@ -33,6 +33,7 @@ describe('Artists database tests:', () => {
       .then(artist => {
         const actual = artist.name
         expect(actual).toEqual(expected)
+        return null
       })
   })
 
@@ -42,6 +43,7 @@ describe('Artists database tests:', () => {
       .then(artists => {
         const actual = artists.map(artist => artist.id)
         expect(actual).toEqual(expected)
+        return null
       })
   })
 
@@ -51,6 +53,7 @@ describe('Artists database tests:', () => {
       .then(artist => {
         const actual = artist.name
         expect(actual).toEqual(expected)
+        return null
       })
   })
 
@@ -59,6 +62,7 @@ describe('Artists database tests:', () => {
       .then(artist => {
         const actual = artist
         expect(actual).toBeFalsy()
+        return null
       })
   })
 
@@ -72,6 +76,7 @@ describe('Artists database tests:', () => {
       .then(artist => {
         const actual = artist
         expect(actual).toEqual(expected)
+        return null
       })
   })
 
@@ -82,6 +87,7 @@ describe('Artists database tests:', () => {
       .then(artists => {
         const actual = artists.map(artist => artist.id)
         expect(actual).toEqual(expected)
+        return null
       })
   })
 })
@@ -104,6 +110,7 @@ describe('Albums database tests', () => {
           .then(album => {
             const actual = album.name
             expect(actual).toEqual(expected)
+            return null
           })
       })
   })
@@ -114,6 +121,7 @@ describe('Albums database tests', () => {
       .then(albums => {
         const actual = albums.map(album => album.id)
         expect(actual).toEqual(expected)
+        return null
       })
   })
 
@@ -123,6 +131,7 @@ describe('Albums database tests', () => {
       .then(album => {
         const actual = album.name
         expect(actual).toEqual(expected)
+        return null
       })
   })
 
@@ -131,8 +140,8 @@ describe('Albums database tests', () => {
     return dbFunctions.getAlbumsByArtist(4, 'id', testDb)
       .then(albumData => {
         const actual = albumData.map(album => album.name)
-
         expect(actual).toEqual(expected)
+        return null
       })
   })
 
@@ -141,8 +150,8 @@ describe('Albums database tests', () => {
     return dbFunctions.getAlbumsByArtist(4, 'name', testDb)
       .then(albumData => {
         const actual = albumData.map(album => album.name)
-
         expect(actual).toEqual(expected)
+        return null
       })
   })
 
@@ -151,10 +160,11 @@ describe('Albums database tests', () => {
     const newData = { name: 'New name for album' }
     return dbFunctions.updateAlbum(8, newData, testDb)
       .then(() => {
-        dbFunctions.getAlbumById(8, testDb)
+        return dbFunctions.getAlbumById(8, testDb)
           .then(album => {
             const actual = album.name
             expect(actual).toEqual(expected)
+            return null
           })
       })
   })
@@ -168,6 +178,7 @@ describe('Albums database tests', () => {
           .then(albums => {
             const actual = albums.map(album => album.id)
             expect(actual).toEqual(expected)
+            return null
           })
       })
   })
@@ -187,6 +198,7 @@ describe('Changelog tests run', () => {
           .then(change => {
             const actual = change.description
             expect(actual).toEqual(expected)
+            return null
           })
       })
   })
@@ -197,6 +209,7 @@ describe('Changelog tests run', () => {
       .then(changes => {
         const actual = changes.length
         expect(actual).toEqual(expected)
+        return null
       })
   })
 
@@ -207,6 +220,7 @@ describe('Changelog tests run', () => {
       .then(change => {
         const actual = change.description
         expect(actual).toEqual(expected)
+        return null
       })
   })
 
@@ -222,6 +236,7 @@ describe('Changelog tests run', () => {
           .then(changelog => {
             const actual = changelog.description
             expect(actual).toEqual(expected)
+            return null
           })
       })
   })
@@ -235,6 +250,7 @@ describe('Changelog tests run', () => {
           .then(changes => {
             const actual = changes.map(change => change.id)
             expect(actual).toEqual(expected)
+            return null
           })
       })
   })

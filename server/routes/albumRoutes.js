@@ -26,9 +26,17 @@ const upload = multer({
 const db = require('../db/dbFunctions')
 
 router.get('/', (req, res) => {
+  let albumsObj = []
   return db.getAlbumsAll()
     .then(albums => {
-      return res.json(albums)
+      albumsObj = albums
+      return db.getArtistsAll()
+        .then(artists => {
+          albumsObj.map(album => {
+            album.artistData = artists.filter(artist => artist.id === album.artist)[0]
+          })
+          return res.json(albumsObj)
+        })
     })
     .catch(err => {
       console.log(err.message)
@@ -49,9 +57,15 @@ router.post('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const id = req.params.id
+  let albumObj = {}
   return db.getAlbumById(id)
     .then(album => {
-      return res.json(album)
+      albumObj = album
+      return db.getArtistById(album.artist)
+        .then(artist => {
+          albumObj.artist_name = artist.name
+          return res.json(albumObj)
+        })
     })
     .catch(err => {
       console.log(err.message)

@@ -49,9 +49,15 @@ router.post('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const id = req.params.id
+  let albumObj = {}
   return db.getAlbumById(id)
     .then(album => {
-      return res.json(album)
+      albumObj = album
+      return db.getArtistById(album.artist)
+        .then(artist => {
+          albumObj.artist_name = artist.name
+          return res.json(albumObj)
+        })
     })
     .catch(err => {
       console.log(err.message)

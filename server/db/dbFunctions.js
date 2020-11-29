@@ -43,11 +43,10 @@ function getAlbumsAll (orderField = 'name', db = connection) {
 }
 
 function getAlbumById (id, db = connection) {
-  return db('artists')
-    .select('artists.name as artist_name', 'albums.name as album_name', 'albums.id as album_id', 'artists.id as artist_id', '*')
+  return db('albums')
+    .select()
     .first()
-    .join('albums', 'albums.artist', 'artists.id')
-    .where('album_id', id)
+    .where('id', id)
 }
 
 function getAlbumsByArtist (artistId, orderField = 'name', db = connection) {

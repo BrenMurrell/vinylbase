@@ -45,7 +45,7 @@ const Album = (props) => {
             <dd>
               <Link to={`/artists/${props.album.artist}`}>
                 {/* TODO-BPM: fix so artist is a NAME not an ID */}
-                {props.album.artist}
+                {props.album.artistData && props.album.artistData.name}
               </Link>
             </dd>
             <dt>Condition</dt>

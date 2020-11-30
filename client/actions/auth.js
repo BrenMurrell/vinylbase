@@ -6,6 +6,7 @@ import {
 } from 'authenticare/client'
 import { doRedirect, clearRedirect } from './ui'
 import { setToaster } from './toaster'
+import { fetchUserAlbums } from './userAlbums'
 
 const baseUrl = '/api/v1/'
 
@@ -30,6 +31,7 @@ export const checkAuth = () => {
     const user = getDecodedToken()
     if (user) {
       dispatch(logIn(user))
+      dispatch(fetchUserAlbums(user.id))
     }
   }
 }
@@ -41,6 +43,7 @@ export const doLogin = (username, password) => {
         if (isAuthenticated()) {
           dispatch(doRedirect('/'))
           dispatch(logIn(token))
+          dispatch(fetchUserAlbums(token.id))
           dispatch(clearRedirect())
         }
         return null

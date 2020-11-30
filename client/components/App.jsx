@@ -18,6 +18,7 @@ import { IfAuthenticated, IfNotAuthenticated } from './Auth/Authenticated'
 import Register from './Auth/Register'
 import SignIn from './Auth/SignIn'
 import SignOut from './Auth/SignOut'
+import UserAlbums from './UserAlbums'
 
 import { fetchAlbums } from '../actions/albums'
 import { fetchArtists } from '../actions/artists'
@@ -25,11 +26,9 @@ import { checkAuth } from '../actions/auth'
 
 const App = (props) => {
   useEffect(() => {
-    // console.log('albums?', props.albums == '')
     props.dispatch(fetchAlbums())
     props.dispatch(fetchArtists())
     props.dispatch(checkAuth())
-    // props.dispatch(loadUi)
   }, [])
   return (
     <div className='wrapper'>
@@ -42,6 +41,9 @@ const App = (props) => {
                 <NavLink exact to="/" activeClassName="nav__item--active" className="nav__item">Home</NavLink>
                 <NavLink to="/albums" activeClassName="nav__item--active" className="nav__item">Albums</NavLink>
                 <NavLink to="/artists" activeClassName="nav__item--active" className="nav__item">Artists</NavLink>
+                <IfAuthenticated>
+                  <NavLink to="/my-albums" activeClassName="nav__item--active" className="nav__item">My albums</NavLink>
+                </IfAuthenticated>
               </nav>
               <nav className="nav nav--account">
                 <IfAuthenticated>
@@ -61,11 +63,15 @@ const App = (props) => {
               <Route path="/artists" exact component={ArtistsList} />
               <Route path="/artists/add" exact component={ArtistAdd} />
               <Route path="/artists/:id" component={Artist} />
+              <Route path="/my-albums" component={UserAlbums} />
               <Route path='/register' component={Register} />
               <Route path='/signin' component={SignIn} />
               <Route path='/signout' component={SignOut} />
             </Switch>
           </main>
+          <footer className="footer">
+            <p className="footer__copy">VinylBase is a project by <a href="https://brenmurrell.github.io">Bren Murrell</a></p>
+          </footer>
         </Router>
       }
       {props.toaster.message && (
@@ -80,7 +86,8 @@ function mapStateToProps (globalState) {
     albums: globalState.albums,
     artists: globalState.artists,
     toaster: globalState.toaster,
-    ui: globalState.ui
+    ui: globalState.ui,
+    auth: globalState.auth
   }
 }
 

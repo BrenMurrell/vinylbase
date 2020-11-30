@@ -13,6 +13,7 @@ beforeEach(() => {
       return testDb.seed.run()
     })
 })
+
 describe('Initialise test suite', () => {
   test('suite is jacked in', () => {
     expect(true).toBeTruthy()

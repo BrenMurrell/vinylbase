@@ -9,7 +9,7 @@
       "json-summary",
       "text"
     ],
-    "coveragePathIgnorePatterns": ["<rootDir>/server/db/migrations","<rootDir>/server/db/"]
+    "coveragePathIgnorePatterns": ["<rootDir>/server/db/migrations","<rootDir>/server/db/seeds"]
   },
   "version": "2.0.0",
   "main": "server/index.js",

@@ -14,15 +14,20 @@ import Artist from './Artist'
 import ArtistAdd from './ArtistAdd'
 import Toaster from './Toaster'
 import AlbumAdd from './AlbumAdd'
+import { IfAuthenticated, IfNotAuthenticated } from './Auth/Authenticated'
+import Register from './Auth/Register'
+import SignIn from './Auth/SignIn'
 
 import { fetchAlbums } from '../actions/albums'
 import { fetchArtists } from '../actions/artists'
+import { checkAuth } from '../actions/auth'
 
 const App = (props) => {
   useEffect(() => {
     // console.log('albums?', props.albums == '')
     props.dispatch(fetchAlbums())
     props.dispatch(fetchArtists())
+    props.dispatch(checkAuth())
     // props.dispatch(loadUi)
   }, [])
   return (
@@ -31,11 +36,21 @@ const App = (props) => {
         <Router>
           <header className="header">
             <h1 className="app-title">VinylBase</h1>
-            <nav className="main-nav">
-              <NavLink exact to="/" activeClassName="main-nav__item--active" className="main-nav__item">Home</NavLink>
-              <NavLink to="/albums" activeClassName="main-nav__item--active" className="main-nav__item">Albums</NavLink>
-              <NavLink to="/artists" activeClassName="main-nav__item--active" className="main-nav__item">Artists</NavLink>
-            </nav>
+            <div className="nav__wrapper">
+              <nav className="nav nav--main">
+                <NavLink exact to="/" activeClassName="nav__item--active" className="nav__item">Home</NavLink>
+                <NavLink to="/albums" activeClassName="nav__item--active" className="nav__item">Albums</NavLink>
+                <NavLink to="/artists" activeClassName="nav__item--active" className="nav__item">Artists</NavLink>
+              </nav>
+              <nav className="nav nav--account">
+                <IfAuthenticated>
+                  <NavLink to="/signout" activeClassName="nav__item--active" className="nav__item">Sign out</NavLink>
+                </IfAuthenticated>
+                <IfNotAuthenticated>
+                  <NavLink to="/signin" activeClassName="nav__item--active" className="nav__item">Sign in</NavLink>
+                </IfNotAuthenticated>
+              </nav>
+            </div>
           </header>
           <main className="main">
             <Switch>
@@ -45,6 +60,8 @@ const App = (props) => {
               <Route path="/artists" exact component={ArtistsList} />
               <Route path="/artists/add" exact component={ArtistAdd} />
               <Route path="/artists/:id" component={Artist} />
+              <Route path='/register' component={Register} />
+              <Route path='/signin' component={SignIn} />
             </Switch>
           </main>
         </Router>

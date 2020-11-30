@@ -1,7 +1,8 @@
 import {
   isAuthenticated,
   signIn,
-  getDecodedToken
+  getDecodedToken,
+  logOff
 } from 'authenticare/client'
 import { doRedirect, clearRedirect } from './ui'
 import { setToaster } from './toaster'
@@ -35,7 +36,6 @@ export const checkAuth = () => {
 
 export const doLogin = (username, password) => {
   return dispatch => {
-    console.log('action', username, password)
     return signIn({ username, password }, { baseUrl })
       .then((token) => {
         if (isAuthenticated()) {
@@ -53,5 +53,17 @@ export const doLogin = (username, password) => {
         }))
         return null
       })
+  }
+}
+
+export const doLogout = () => {
+  return dispatch => {
+    logOff()
+    dispatch(logOut())
+    dispatch(setToaster({
+      type: 'normal',
+      message: 'Logged out successfully.'
+    }))
+    return null
   }
 }

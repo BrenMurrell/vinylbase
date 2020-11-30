@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { isAuthenticated, register } from 'authenticare/client'
 // const baseUrl = `${process.env.API_BASE_URL}/auth`
-const baseUrl = 'http://localhost:3000/api/v1/'
+const baseUrl = '/api/v1/'
 
 function Register (props) {
   const [form, setForm] = useState({

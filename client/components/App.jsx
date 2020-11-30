@@ -17,6 +17,7 @@ import AlbumAdd from './AlbumAdd'
 import { IfAuthenticated, IfNotAuthenticated } from './Auth/Authenticated'
 import Register from './Auth/Register'
 import SignIn from './Auth/SignIn'
+import SignOut from './Auth/SignOut'
 
 import { fetchAlbums } from '../actions/albums'
 import { fetchArtists } from '../actions/artists'
@@ -62,6 +63,7 @@ const App = (props) => {
               <Route path="/artists/:id" component={Artist} />
               <Route path='/register' component={Register} />
               <Route path='/signin' component={SignIn} />
+              <Route path='/signout' component={SignOut} />
             </Switch>
           </main>
         </Router>

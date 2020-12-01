@@ -8,7 +8,11 @@ const Toaster = (props) => {
     props.dispatch(clearToaster())
   }
 
+  const speechSynth = window.speechSynthesis
+
   useEffect(() => {
+    const utterThis = new SpeechSynthesisUtterance(props.toaster.message)
+    speechSynth.speak(utterThis)
     setTimeout(() => {
       props.dispatch(clearToaster())
     }, 4000)

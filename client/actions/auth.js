@@ -44,6 +44,7 @@ export const doLogin = (username, password) => {
           dispatch(doRedirect('/'))
           dispatch(logIn(token))
           dispatch(fetchUserAlbums(token.id))
+          dispatch(setToaster({ type: '', message: 'Successfully logged in as ' + token.username }))
           dispatch(clearRedirect())
         }
         return null

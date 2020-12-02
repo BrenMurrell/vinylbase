@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom'
 
 import Modal from './Modal'
 import IfAdmin from './Auth/IfAdmin'
+import IfAuthenticated from './Auth/IfAuthenticated'
 
 import { setAlbum, removeAlbum } from '../actions/albums'
+import { createUserAlbum } from '../actions/userAlbums'
 import { setToaster } from '../actions/toaster'
 
 const Album = (props) => {
@@ -29,6 +31,16 @@ const Album = (props) => {
     props.dispatch(setToaster(toaster))
   }
 
+  const addToCollection = () => {
+    console.log(props.auth)
+    props.dispatch(createUserAlbum(props.auth.user.uid, albumID))
+    const toaster = {
+      type: 'normal',
+      message: `${props.album.name} added to your collection`
+    }
+    props.dispatch(setToaster(toaster))
+  }
+
   return (
     <div className="album">
       <h1>{props.album.name}</h1>
@@ -45,19 +57,22 @@ const Album = (props) => {
             <dt>Artist</dt>
             <dd>
               <Link to={`/artists/${props.album.artist}`}>
-                {/* TODO-BPM: fix so artist is a NAME not an ID */}
                 {props.album.artistData && props.album.artistData.name}
               </Link>
             </dd>
-            <dt>Condition</dt>
+            {/* following is to move to userAlbums view */}
+            {/* <dt>Condition</dt>
             <dd>{props.album.condition}</dd>
             <dt>Notes</dt>
-            <dd>{props.album.notes}</dd>
+            <dd>{props.album.notes}</dd> */}
           </dl>
-          <p>
-            <a href="/albums/6/edit" className="button button-primary">Edit this album</a>
-          </p>
+          <IfAuthenticated>
+            <button className="btn btn--primary" onClick={() => addToCollection()}>Add to my albums</button>
+          </IfAuthenticated>
           <IfAdmin>
+            <p>
+              <a href="/albums/6/edit" className="button button-primary">Edit this album</a>
+            </p>
             <p>
               <button className="btn btn--warning" onClick={() => setModalVisible(true)}>Delete this album</button>
             </p>
@@ -84,7 +99,8 @@ const Album = (props) => {
 const mapStateToProps = (globalState) => {
   return {
     album: globalState.album,
-    albums: globalState.albums
+    albums: globalState.albums,
+    auth: globalState.auth
   }
 }
 

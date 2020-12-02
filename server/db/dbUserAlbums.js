@@ -10,6 +10,20 @@ function getUserAlbums (userId, db = connection) {
     .where('user_id', userId)
 }
 
+function getUserAlbumEntry (userAlbumId, db = connection) {
+  return db('user_albums')
+    .select()
+    .where('id', userAlbumId)
+    .first()
+}
+
+function addUserAlbum (userAlbum, db = connection) {
+  return db('user_albums')
+    .insert(userAlbum)
+}
+
 module.exports = {
+  addUserAlbum,
+  getUserAlbumEntry,
   getUserAlbums
 }

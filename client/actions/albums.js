@@ -9,6 +9,7 @@ export const ALBUMS_LOADED = 'ALBUMS_LOADED'
 export const RESET_ALBUM = 'RESET_ALBUM'
 export const RESET_ALBUMS = 'RESET_ALBUMS'
 export const RESET_ARTIST_ALBUMS = 'RESET_ARTIST_ALBUMS'
+export const ADDED_ARTIST_ALBUM = 'ADDED_ARTIST_ALBUM'
 
 export function setAlbum (album) {
   return {

@@ -31,7 +31,7 @@ const App = (props) => {
   }, [])
   return (
     <div className='wrapper'>
-      {(props.ui.albumsLoaded && props.ui.artistsLoaded && props.ui.authLoaded) &&
+      {(props.ui.albumsLoaded && props.ui.artistsLoaded) &&
         <Router>
           <header className="header">
             <h1 className="app-title">VinylBase</h1>

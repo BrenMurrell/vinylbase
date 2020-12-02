@@ -9,7 +9,10 @@
       "json-summary",
       "text"
     ],
-    "coveragePathIgnorePatterns": ["<rootDir>/server/db/migrations","<rootDir>/server/db/seeds"]
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/server/db/migrations",
+      "<rootDir>/server/db/seeds"
+    ]
   },
   "version": "2.0.0",
   "main": "server/index.js",
@@ -53,6 +56,7 @@
     "aws-sdk": "^2.797.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "firebase": "^8.1.1",
     "fs": "^0.0.1-security",
     "knex": "^0.21.12",
     "multer": "^1.4.2",

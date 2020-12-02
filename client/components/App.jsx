@@ -19,13 +19,16 @@ import Register from './Auth/Register'
 import SignIn from './Auth/SignIn'
 import SignOut from './Auth/SignOut'
 import UserAlbums from './UserAlbums'
+import Button from './Button'
+import { google, facebook, twitter } from '../config/firebase'
 
 import { fetchAlbums } from '../actions/albums'
 import { fetchArtists } from '../actions/artists'
-import { checkAuth } from '../actions/auth'
+import { checkAuth, signInWithProvider, fetchUser } from '../actions/auth'
 
 const App = (props) => {
   useEffect(() => {
+    props.dispatch(fetchUser())
     props.dispatch(fetchAlbums())
     props.dispatch(fetchArtists())
     props.dispatch(checkAuth())
@@ -71,6 +74,19 @@ const App = (props) => {
           </main>
           <footer className="footer">
             <p className="footer__copy">VinylBase is a project by <a href="https://brenmurrell.github.io">Bren Murrell</a></p>
+
+            <Button
+              clickHandler={() => props.dispatch(signInWithProvider(google))}
+              label="Sign in with Google"
+            />
+            <Button
+              clickHandler={() => props.dispatch(signInWithProvider(facebook))}
+              label="Sign in with Facebook"
+            />
+            <Button
+              clickHandler={() => props.dispatch(signInWithProvider(twitter))}
+              label="Sign in with Twitter"
+            />
           </footer>
         </Router>
       }

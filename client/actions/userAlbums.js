@@ -10,6 +10,7 @@ export const setUserAlbums = (userAlbums) => {
 }
 
 export const fetchUserAlbums = (userId) => {
+  console.log('fetching for ', userId)
   return dispatch => {
     return getUserAlbums(userId)
       .then(userAlbums => {

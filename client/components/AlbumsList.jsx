@@ -2,16 +2,17 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import AlbumListItem from './AlbumListItem'
-import { IfAuthenticated } from './Auth/Authenticated'
+// import IfNotAuthenticated from './Auth/IfNotAuthenticated'
+import IfAdmin from './Auth/IfAdmin'
 
 class AlbumsList extends React.Component {
   render () {
     return (
       <>
         <h2>All albums</h2>
-        <IfAuthenticated>
+        <IfAdmin>
           <Link className="btn" to="/albums/add">Add an album</Link>
-        </IfAuthenticated>
+        </IfAdmin>
         <div className="albums">
           {this.props.albums.map(album => (
             <AlbumListItem album={album} key={album.id} />

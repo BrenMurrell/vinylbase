@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import AlbumListItem from './AlbumListItem'
 import Modal from './Modal'
+import IfAdmin from './Auth/IfAdmin'
 
 import { setArtistAlbums } from '../actions/albums'
 import { setArtist, removeArtist } from '../actions/artists'
@@ -33,20 +34,24 @@ const Artist = (props) => {
   return (
     <div>
       <h2>{props.artist.name}</h2>
-      <button className="btn btn--warning" onClick={() => setModalVisible(true)}>Delete this artist</button>
+      <IfAdmin>
+        <button className="btn btn--warning" onClick={() => setModalVisible(true)}>Delete this artist</button>
+      </IfAdmin>
       <div className="albums">
         {props.artistAlbums.map(album =>
           <AlbumListItem key={album.id} album={album} />
         )}
         { modalVisible && (
-          <Modal title="Are you sure?">
-            <p>Are you really sure you want to delete {props.artist.name}?</p>
-            <p>Note: this will NOT delete their albums (yet). Also there is <strong><em>no</em></strong> undo</p>
-            <div className="buttons">
-              <button className="btn btn--green" onClick={() => setModalVisible(false)}>Cancel</button>
-              <button className="btn btn--warning" onClick={() => deleteThisArtist()}>Delete</button>
-            </div>
-          </Modal>
+          <IfAdmin>
+            <Modal title="Are you sure?">
+              <p>Are you really sure you want to delete {props.artist.name}?</p>
+              <p>Note: this will NOT delete their albums (yet). Also there is <strong><em>no</em></strong> undo</p>
+              <div className="buttons">
+                <button className="btn btn--green" onClick={() => setModalVisible(false)}>Cancel</button>
+                <button className="btn btn--warning" onClick={() => deleteThisArtist()}>Delete</button>
+              </div>
+            </Modal>
+          </IfAdmin>
         )}
       </div>
     </div>

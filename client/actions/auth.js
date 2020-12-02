@@ -1,15 +1,10 @@
-import {
-  isAuthenticated,
-  signIn,
-  getDecodedToken,
-  logOff
-} from 'authenticare/client'
-import { doRedirect, clearRedirect } from './ui'
+import { firebaseApp, authRef } from '../config/firebase'
+
 import { setToaster } from './toaster'
 import { fetchUserAlbums } from './userAlbums'
 
-const baseUrl = '/api/v1/'
-
+// const baseUrl = '/api/v1/'
+export const AUTH_LOADED = 'AUTH_LOADED'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGOUT = 'LOGOUT'
 
@@ -20,53 +15,69 @@ export const logIn = (user) => {
   }
 }
 
+export const authLoaded = () => {
+  return {
+    type: AUTH_LOADED
+  }
+}
+
 export const logOut = () => {
   return {
     type: LOGOUT
   }
 }
 
-export const checkAuth = () => {
+export const fetchUser = () => {
   return dispatch => {
-    const user = getDecodedToken()
-    if (user) {
+    authRef.onAuthStateChanged(user => {
+      if (user) {
+        dispatch(logIn(user))
+        dispatch(authLoaded())
+        dispatch(fetchUserAlbums(user.uid))
+      } else {
+        dispatch(authLoaded())
+      }
+    })
+  }
+}
+
+export const signOut = () => dispatch => {
+  firebaseApp.auth().signOut()
+    .then(result => {
+      dispatch(logOut())
+      return null
+    })
+    .catch(error => {
+      console.log(error.message)
+    })
+}
+
+export const signInWithProvider = (provider) => dispatch => {
+  firebaseApp.auth().signInWithPopup(provider)
+    .then(result => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      // var token = result.credential.accessToken
+      var user = result.user
       dispatch(logIn(user))
-      dispatch(fetchUserAlbums(user.id))
-    }
-  }
-}
-
-export const doLogin = (username, password) => {
-  return dispatch => {
-    return signIn({ username, password }, { baseUrl })
-      .then((token) => {
-        if (isAuthenticated()) {
-          dispatch(doRedirect('/'))
-          dispatch(logIn(token))
-          dispatch(fetchUserAlbums(token.id))
-          dispatch(clearRedirect())
-        }
-        return null
-      })
-      .catch(err => {
-        console.log(err.message)
-        dispatch(setToaster({
-          type: 'error',
-          message: 'Login failed. Please try again'
-        }))
-        return null
-      })
-  }
-}
-
-export const doLogout = () => {
-  return dispatch => {
-    logOff()
-    dispatch(logOut())
-    dispatch(setToaster({
-      type: 'normal',
-      message: 'Logged out successfully.'
-    }))
-    return null
-  }
+      dispatch(setToaster({
+        type: 'normal',
+        message: 'Logged in successfully.'
+      }))
+      return null
+    })
+    .catch(error => {
+    // Handle Errors here.
+      var errorCode = error.code
+      var errorMessage = error.message
+      // The email of the user's account used.
+      var email = error.email
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential
+      console.log(
+        'errorCode', errorCode,
+        'errorMessage', errorMessage,
+        'email', email,
+        'credential', credential
+      )
+    })
 }

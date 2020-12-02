@@ -14,25 +14,24 @@ import Artist from './Artist'
 import ArtistAdd from './ArtistAdd'
 import Toaster from './Toaster'
 import AlbumAdd from './AlbumAdd'
-import { IfAuthenticated, IfNotAuthenticated } from './Auth/Authenticated'
-import Register from './Auth/Register'
-import SignIn from './Auth/SignIn'
-import SignOut from './Auth/SignOut'
+import IfNotAuthenticated from './Auth/IfNotAuthenticated'
+import IfAuthenticated from './Auth/IfAuthenticated'
 import UserAlbums from './UserAlbums'
+import { google, github } from '../config/firebase'
 
 import { fetchAlbums } from '../actions/albums'
 import { fetchArtists } from '../actions/artists'
-import { checkAuth } from '../actions/auth'
+import { signInWithProvider, fetchUser, signOut } from '../actions/auth'
 
 const App = (props) => {
   useEffect(() => {
+    props.dispatch(fetchUser())
     props.dispatch(fetchAlbums())
     props.dispatch(fetchArtists())
-    props.dispatch(checkAuth())
   }, [])
   return (
     <div className='wrapper'>
-      {(props.ui.albumsLoaded && props.ui.artistsLoaded) &&
+      {(props.ui.albumsLoaded && props.ui.artistsLoaded && props.ui.authLoaded) &&
         <Router>
           <header className="header">
             <h1 className="app-title">VinylBase</h1>
@@ -46,12 +45,12 @@ const App = (props) => {
                 </IfAuthenticated>
               </nav>
               <nav className="nav nav--account">
-                <IfAuthenticated>
+                {/* <IfAuthenticated>
                   <NavLink to="/signout" activeClassName="nav__item--active" className="nav__item">Sign out</NavLink>
+                </IfAuthenticated> */}
+                <IfAuthenticated>
+                  <button className="nav__item" onClick={() => props.dispatch(signOut())}>Sign out</button>
                 </IfAuthenticated>
-                <IfNotAuthenticated>
-                  <NavLink to="/signin" activeClassName="nav__item--active" className="nav__item">Sign in</NavLink>
-                </IfNotAuthenticated>
               </nav>
             </div>
           </header>
@@ -64,12 +63,15 @@ const App = (props) => {
               <Route path="/artists/add" exact component={ArtistAdd} />
               <Route path="/artists/:id" component={Artist} />
               <Route path="/my-albums" component={UserAlbums} />
-              <Route path='/register' component={Register} />
-              <Route path='/signin' component={SignIn} />
-              <Route path='/signout' component={SignOut} />
             </Switch>
           </main>
           <footer className="footer">
+            <IfNotAuthenticated>
+              <p className="footer__copy">
+                <button className="btn" onClick={() => props.dispatch(signInWithProvider(google))}>Login in with Google</button>
+                <button className="btn" onClick={() => props.dispatch(signInWithProvider(github))}>Log in with Github</button>
+              </p>
+            </IfNotAuthenticated>
             <p className="footer__copy">VinylBase is a project by <a href="https://brenmurrell.github.io">Bren Murrell</a></p>
           </footer>
         </Router>

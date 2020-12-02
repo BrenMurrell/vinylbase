@@ -1,7 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { IfAuthenticated, IfNotAuthenticated } from './Auth/Authenticated'
+import IfNotAuthenticated from './Auth/IfNotAuthenticated'
+import IfAuthenticated from './Auth/IfAuthenticated'
 import AlbumListItem from './AlbumListItem'
+
 const UserAlbums = (props) => {
   return (
     <>

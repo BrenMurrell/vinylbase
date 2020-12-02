@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 
 import { setToaster } from '../actions/toaster'
 
+import IfAdmin from './Auth/IfAdmin'
+
 const ArtistAdd = (props) => {
   const [name, setName] = useState('')
 
@@ -26,14 +28,16 @@ const ArtistAdd = (props) => {
 
   return (
     <div>
-      <h2>Add a new artist</h2>
-      <form onSubmit={handleSubmit}>
-        <label className="form__label" htmlFor="name">
-          <span className="form__label-title">Artist name</span>
-          <input type="text" name="name" value={name} onChange={onChange} required />
-        </label>
-        <button className="btn">Submit</button>
-      </form>
+      <IfAdmin>
+        <h2>Add a new artist</h2>
+        <form onSubmit={handleSubmit}>
+          <label className="form__label" htmlFor="name">
+            <span className="form__label-title">Artist name</span>
+            <input type="text" name="name" value={name} onChange={onChange} required />
+          </label>
+          <button className="btn">Submit</button>
+        </form>
+      </IfAdmin>
     </div>
   )
 }

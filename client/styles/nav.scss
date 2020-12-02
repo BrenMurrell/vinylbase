@@ -6,14 +6,18 @@
     border-radius: 0.4rem 0.4rem 0 0;
     margin-right: 0.4rem;
     display: inline-block;
-    line-height: 2.6rem;
+    line-height: 3.6rem;
     padding: 0 2rem;
     background-color: #1579e0;
     color: white;
     text-decoration: none;
+    border: 0;
+    font-size: 1.4rem;
+
     &:hover {
       background-color: lighten(#1579e0, 10%)
     }
+
     &--active {
       background-color: #ffffff;
       color: #222;
@@ -25,7 +29,7 @@
       margin-right: 0;
       margin-left: 0.4rem;
       border-radius: 0.4rem;
-      line-height: 2.4rem;
+      line-height: 3.4rem;
     }
   }
 

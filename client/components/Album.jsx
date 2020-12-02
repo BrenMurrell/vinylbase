@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import Modal from './Modal'
+import IfAdmin from './Auth/IfAdmin'
 
 import { setAlbum, removeAlbum } from '../actions/albums'
 import { setToaster } from '../actions/toaster'
@@ -56,21 +57,25 @@ const Album = (props) => {
           <p>
             <a href="/albums/6/edit" className="button button-primary">Edit this album</a>
           </p>
-          <p>
-            <button className="btn btn-primary" onClick={() => setModalVisible(true)}>Delete this album</button>
-          </p>
+          <IfAdmin>
+            <p>
+              <button className="btn btn--warning" onClick={() => setModalVisible(true)}>Delete this album</button>
+            </p>
+          </IfAdmin>
         </div>
       </div>
 
       { modalVisible && (
-        <Modal title="Are you sure?">
-          <p>Are you really sure you want to delete {props.album.name}?</p>
-          <p>There is <strong><em>no</em></strong> undo</p>
-          <div className="buttons">
-            <button className="btn btn--warning" onClick={() => setModalVisible(false)}>Cancel</button>
-            <button className="btn btn--warning" onClick={() => deleteThisAlbum()}>Delete</button>
-          </div>
-        </Modal>
+        <IfAdmin>
+          <Modal title="Are you sure?">
+            <p>Are you really sure you want to delete {props.album.name}?</p>
+            <p>There is <strong><em>no</em></strong> undo</p>
+            <div className="buttons">
+              <button className="btn btn--warning" onClick={() => setModalVisible(false)}>Cancel</button>
+              <button className="btn btn--warning" onClick={() => deleteThisAlbum()}>Delete</button>
+            </div>
+          </Modal>
+        </IfAdmin>
       )}
     </div>
   )

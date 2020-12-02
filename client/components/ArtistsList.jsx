@@ -1,16 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { IfAuthenticated } from './Auth/Authenticated'
+// import IfNotAuthenticated from './Auth/IfNotAuthenticated'
+import IfAdmin from './Auth/IfAdmin'
 
 class ArtistsList extends React.Component {
   render () {
     return (
       <div>
         <h2>Artist list</h2>
-        <IfAuthenticated>
+        <IfAdmin>
           <Link className="btn" to={'/artists/add'}>Add a new artist</Link>
-        </IfAuthenticated>
+        </IfAdmin>
         {this.props.artists.map(artist => (
           <p key={artist.id}>
             <Link to={`/artists/${artist.id}`}>

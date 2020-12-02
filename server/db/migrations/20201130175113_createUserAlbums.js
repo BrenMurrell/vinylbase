@@ -1,7 +1,7 @@
 exports.up = (knex, Promise) => {
   return knex.schema.createTable('user_albums', table => {
     table.increments('id')
-    table.integer('user_id')
+    table.string('user_id')
     table.integer('album_id')
     table.string('condition')
     table.string('notes')

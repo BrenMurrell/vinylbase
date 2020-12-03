@@ -1,5 +1,5 @@
+/* eslint-disable promise/no-nesting */
 import { firebaseApp, authRef } from '../config/firebase'
-
 import { setToaster } from './toaster'
 import { fetchUserAlbums } from './userAlbums'
 
@@ -29,6 +29,9 @@ export const logOut = () => {
 
 export const fetchUser = () => {
   return dispatch => {
+    // initially check local token
+    // ---- add that code here
+    // then:
     authRef.onAuthStateChanged(user => {
       if (user) {
         dispatch(logIn(user))
@@ -53,10 +56,13 @@ export const signOut = () => dispatch => {
 }
 
 export const signInWithProvider = (provider) => dispatch => {
-  firebaseApp.auth().signInWithPopup(provider)
+  // firebaseApp.auth().setPersistence(firebaseApp.auth.Auth.Persistence.LOCAL)
+  // // .then(function() {
+  //   .then(() => {
+  return firebaseApp.auth().signInWithPopup(provider)
     .then(result => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      // var token = result.credential.accessToken
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    // var token = result.credential.accessToken
       var user = result.user
       dispatch(logIn(user))
       dispatch(setToaster({
@@ -65,19 +71,8 @@ export const signInWithProvider = (provider) => dispatch => {
       }))
       return null
     })
-    .catch(error => {
-    // Handle Errors here.
-      var errorCode = error.code
-      var errorMessage = error.message
-      // The email of the user's account used.
-      var email = error.email
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential
-      console.log(
-        'errorCode', errorCode,
-        'errorMessage', errorMessage,
-        'email', email,
-        'credential', credential
-      )
+    .catch((err) => {
+      console.log(err.message)
     })
+    // })
 }

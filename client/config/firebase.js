@@ -15,7 +15,7 @@ const firebaseConfig = {
 }
 
 export const firebaseApp = firebase.initializeApp(firebaseConfig)
-
+firebaseApp.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
 export const authRef = firebase.auth()
 export const google = new firebase.auth.GoogleAuthProvider()
 export const github = new firebase.auth.GithubAuthProvider()
